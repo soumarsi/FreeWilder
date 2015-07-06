@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ProductList" syncable="YES">
+        <attribute name="categoryId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="categoryname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productimage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="productname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="start_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userimage" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ProductList" positionX="-63" positionY="-18" width="128" height="225"/>
+    </elements>
+</model>
