@@ -127,7 +127,55 @@
                 }
                 else
                 {
+                    //delete core data
                     
+                    NSManagedObjectContext *context3=[appDelegate managedObjectContext];
+                    NSFetchRequest *request3=[[NSFetchRequest alloc] initWithEntityName:@"ProductList"];
+                    NSMutableArray *fetchrequest3=[[context3 executeFetchRequest:request3 error:nil] mutableCopy];
+                    for (NSManagedObject *obj3 in fetchrequest3)
+                    {
+                        
+                        [context3 deleteObject:obj3];
+                        
+                        
+                    }
+                    
+                    // put url data in core data
+                    for ( NSDictionary *tempDict1 in  [result objectForKey:@"details"])
+                    {
+                        NSLog(@"putting image data in core data.");
+                        NSManagedObjectContext *context=[appDelegate managedObjectContext];
+                        NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"ProductList" inManagedObjectContext:context];
+                        NSLog(@"cat id=%@",CategoryId);
+                        [manageobject setValue:CategoryId forKey:@"categoryId"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"category_name"] forKey:@"categoryname"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"date"] forKey:@"date"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"description"] forKey:@"desp"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"start_time"] forKey:@"start_time"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"close_time"] forKey:@"end_time"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
+                        [manageobject setValue:@"1" forKey:@"productid"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"description"] forKey:@"desp"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"name"] forKey:@"productname"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"ratings"] forKey:@"rating"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
+                        [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]]] forKey:@"productimage"];
+                        //     UIImageView *productimgview=[[UIImageView alloc]init];
+                        //    [productimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@""] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                        
+                        //   NSLog(@"image=%@",productimgview.image);
+                        //   NSData *imgData= UIImagePNGRepresentation(productimgview.image);
+                        //   [manageobject setValue:imgData forKey:@"productimage"];
+                        
+                        //    UIImageView *userimgview=[[UIImageView alloc]init];
+                        //     [userimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]] placeholderImage:[UIImage imageNamed:@"Profile_image_placeholder"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                        //     NSLog(@"image=%@",productimgview.image);
+                        //     NSData *imgData1= UIImagePNGRepresentation(userimgview.image);
+                        //      [manageobject setValue:imgData1 forKey:@"userimage"];
+                        
+                        [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]]] forKey:@"userimage"];
+                        [appDelegate saveContext];
+                    }
                 }
             }
         }];
