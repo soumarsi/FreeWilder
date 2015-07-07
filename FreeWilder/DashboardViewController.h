@@ -11,6 +11,7 @@
 #import "FW_JsonClass.h"
 #import "ProductViewController.h"
 #import "UIImageView+WebCache.h"
+#import "AppDelegate.h"
 @interface DashboardViewController : UIViewController<Slide_menu_delegate>
 {
     // Creating Side menu object
@@ -21,6 +22,8 @@
     //json class object
     
     FW_JsonClass *globalobj;
+    AppDelegate *appDelegate;
+    bool localdata;
 }
 @property (strong, nonatomic) IBOutlet UIView *footer_base;
 - (IBAction)more_interests:(id)sender;

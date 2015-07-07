@@ -94,7 +94,7 @@
     
     
     globalobj=[[FW_JsonClass alloc]init];
-    
+     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [self urlFire];
     
     
@@ -142,7 +142,6 @@
 {
     
     //firing url
-    
     NSString *urlstring=[NSString stringWithFormat:@"%@verify_app_category?categorytype=toplevel",App_Domain_Url];
     
     [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
@@ -152,7 +151,7 @@
         
         jsonResult=[result mutableCopy];
         
-    //    NSLog(@"jsonResult... : %@",jsonResult);
+        //    NSLog(@"jsonResult... : %@",jsonResult);
         
         NSLog(@"jsonResult count... %lu",(long)[[jsonResult valueForKey:@"infoaray"] count]);
         
@@ -246,6 +245,407 @@
     
     
     
+        //////////////////////////
+   /*
+        NSManagedObjectContext *context1=[appDelegate managedObjectContext];
+        NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"CategoryList"];
+        NSMutableArray *fetchrequest=[[context1 executeFetchRequest:request error:nil] mutableCopy];
+        NSInteger CoreDataCount=[fetchrequest count];
+        NSLog(@"core data count=%ld",(long)CoreDataCount);
+       
+        
+        
+        if (CoreDataCount>0)
+        {
+            localdata=1;
+             jsonResult=[[NSMutableArray alloc]init];
+            // data present in core data so show data from core data
+            NSLog(@"data from local db");
+            resultCount=CoreDataCount;
+            resultCount-=4;
+            for (NSManagedObject *obj1 in fetchrequest)
+            {
+                
+                //   NSLog(@"category id1=%@",[obj1 valueForKey:@"categoryId"]);
+               
+                    // datacount++;
+                    [jsonResult addObject:obj1];
+                
+            }
+          
+            [self btnCreate];
+            
+            //Modifying buttons which are created in storyboard
+            
+            //btn1
+            
+            [btn1 setTitle:[[jsonResult objectAtIndex:(0) ]valueForKey:@"categoryName"] forState:UIControlStateNormal];
+            
+            btn1.titleLabel.adjustsFontSizeToFitWidth=YES;
+            
+            [btn1.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+            btn1.layer.borderWidth=0.5;
+            
+            [btn1 setTitleColor:[UIColor colorWithRed:(115.0f/255.0) green:(115.0f/255.0) blue:(115.0f/255.0) alpha:3] forState:UIControlStateNormal];
+            [[btn1 layer] setBorderWidth:0.5f];
+            [[btn1 layer] setBorderColor:[UIColor colorWithRed:(171.0f/255.0) green:(171.0f/255.0) blue:(171.0f/255.0) alpha:1].CGColor];
+            [btn1 setBackgroundColor:[UIColor whiteColor]];
+            
+            
+            [btn1 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+            btn1.tag=[[[jsonResult objectAtIndex:(0) ]valueForKey:@"categoryId"] integerValue];
+            
+            
+            [btn1 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            //btn2
+            
+            [btn2 setTitle:[[jsonResult objectAtIndex:(1) ]valueForKey:@"categoryName"] forState:UIControlStateNormal];
+            
+            btn2.titleLabel.adjustsFontSizeToFitWidth=YES;
+            
+            [btn2.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+            btn2.layer.borderWidth=0.5;
+            
+            
+            
+            [btn2 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+            btn2.tag=[[[jsonResult objectAtIndex:(1) ]valueForKey:@"categoryId"] integerValue];
+            [btn2 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            
+            //btn3
+            
+            [btn3 setTitle:[[jsonResult objectAtIndex:(2) ]valueForKey:@"categoryName"] forState:UIControlStateNormal];
+            
+            btn3.titleLabel.adjustsFontSizeToFitWidth=YES;
+            
+            [btn3.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+            btn3.layer.borderWidth=0.5;
+            
+            
+            [btn3 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+            
+            btn3.tag=[[[jsonResult objectAtIndex:(2) ]valueForKey:@"categoryId"] integerValue];
+            [btn3 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            
+            
+            //btn4
+            
+            
+            [btn4 setTitle:[[jsonResult objectAtIndex:(3) ]valueForKey:@"categoryName"] forState:UIControlStateNormal];
+            
+            btn4.titleLabel.adjustsFontSizeToFitWidth=YES;
+            
+            
+            [btn4.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+            btn4.layer.borderWidth=0.5;
+            
+            
+            [btn4 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+            btn4.tag=[[[jsonResult objectAtIndex:(3) ]valueForKey:@"CategoryId"] integerValue];
+            [btn4 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+            
+            //check local data and url data same or not
+            //fire url
+            NSString *urlstring=[NSString stringWithFormat:@"%@verify_app_category?categorytype=toplevel",App_Domain_Url];
+            
+            [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
+                localdata=1;
+                NSLog(@"result=%@",result);
+                if([[result valueForKey:@"response"] isEqualToString:@"success"])
+                    
+                {
+                    //           NSOperationQueue *myQueue2 = [[NSOperationQueue alloc] init];
+                    //           [myQueue2 addOperationWithBlock:^{
+                 NSInteger urlCount=(int)[[result valueForKey:@"infoaray"] count];
+                    NSLog(@"core data count=%ld",(long)CoreDataCount);
+                    NSLog(@"url data count=%ld",(long)urlCount);
+                    // local data and url data same
+                    if (CoreDataCount==urlCount)
+                    {
+                        //do nothing
+                    }
+                    else
+                    {
+                        //delete the particular category data from core data
+                        NSLog(@"delete the particular category data from core data");
+                        NSManagedObjectContext *context3=[appDelegate managedObjectContext];
+                        NSFetchRequest *request3=[[NSFetchRequest alloc] initWithEntityName:@"CategoryList"];
+                        NSMutableArray *fetchrequest3=[[context3 executeFetchRequest:request3 error:nil] mutableCopy];
+                        for (NSManagedObject *obj3 in fetchrequest3)
+                        {
+                            
+                            [context3 deleteObject:obj3];
+                            
+                            
+                        }
+                        
+                        // put url data in core data
+                        for ( NSDictionary *tempDict1 in  [result valueForKey:@"infoaray"])
+                        {
+                            NSLog(@"putting data in core data.");
+                            NSManagedObjectContext *context=[appDelegate managedObjectContext];
+                            NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"CategoryList" inManagedObjectContext:context];
+                           
+                            [manageobject setValue:[tempDict1 valueForKey:@"id"] forKey:@"categoryId"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"category_name"] forKey:@"categoryname"];
+                            
+                            [appDelegate saveContext];
+                        }
+                        
+                        // data show from core data
+                        jsonResult=[[NSMutableArray alloc]init];
+                        NSManagedObjectContext *context5=[appDelegate managedObjectContext];
+                        NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"CategoryList"];
+                        NSMutableArray *fetchrequest=[[context5 executeFetchRequest:request error:nil] mutableCopy];
+                        resultCount=fetchrequest.count;
+                        resultCount-=4;
+                        for (NSManagedObject *obj1 in fetchrequest)
+                        {
+                            
+                            //   NSLog(@"category id1=%@",[obj1 valueForKey:@"categoryId"]);
+                            
+                            // datacount++;
+                            [jsonResult addObject:obj1];
+                            
+                        }
+                       
+                        
+                    }
+                    //           [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    //            }];
+                    //        }];
+                    
+                }
+                
+                [self btnCreate];
+                
+                //Modifying buttons which are created in storyboard
+                
+                //btn1
+                
+                [btn1 setTitle:[[jsonResult objectAtIndex:(0) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+                
+                btn1.titleLabel.adjustsFontSizeToFitWidth=YES;
+                
+                [btn1.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+                btn1.layer.borderWidth=0.5;
+                
+                [btn1 setTitleColor:[UIColor colorWithRed:(115.0f/255.0) green:(115.0f/255.0) blue:(115.0f/255.0) alpha:3] forState:UIControlStateNormal];
+                [[btn1 layer] setBorderWidth:0.5f];
+                [[btn1 layer] setBorderColor:[UIColor colorWithRed:(171.0f/255.0) green:(171.0f/255.0) blue:(171.0f/255.0) alpha:1].CGColor];
+                [btn1 setBackgroundColor:[UIColor whiteColor]];
+                
+                
+                [btn1 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+                btn1.tag=[[[jsonResult objectAtIndex:(0) ]valueForKey:@"categoryId"] integerValue];
+                
+                
+                [btn1 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+                
+                
+                //btn2
+                
+                [btn2 setTitle:[[jsonResult objectAtIndex:(1) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+                
+                btn2.titleLabel.adjustsFontSizeToFitWidth=YES;
+                
+                [btn2.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+                btn2.layer.borderWidth=0.5;
+                
+                
+                
+                [btn2 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+                btn2.tag=[[[jsonResult objectAtIndex:(1) ]valueForKey:@"categoryId"] integerValue];
+                [btn2 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+                
+                
+                
+                //btn3
+                
+                [btn3 setTitle:[[jsonResult objectAtIndex:(2) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+                
+                btn3.titleLabel.adjustsFontSizeToFitWidth=YES;
+                
+                [btn3.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+                btn3.layer.borderWidth=0.5;
+                
+                
+                [btn3 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+                
+                btn3.tag=[[[jsonResult objectAtIndex:(2) ]valueForKey:@"categoryId"] integerValue];
+                [btn3 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+                
+                
+                
+                
+                //btn4
+                
+                
+                [btn4 setTitle:[[jsonResult objectAtIndex:(3) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+                
+                btn4.titleLabel.adjustsFontSizeToFitWidth=YES;
+                
+                
+                [btn4.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+                btn4.layer.borderWidth=0.5;
+                
+                
+                [btn4 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+                btn4.tag=[[[jsonResult objectAtIndex:(3) ]valueForKey:@"CategoryId"] integerValue];
+                [btn4 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+
+            }];
+            
+            
+            
+        }
+        else
+        {
+            localdata=0;
+            // core data empty
+            //fire url
+            
+            NSLog(@"data from url");
+            
+            NSString *urlstring=[NSString stringWithFormat:@"%@verify_app_category?categorytype=toplevel",App_Domain_Url];
+            
+            [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
+                
+                
+                jsonResult=[[NSMutableArray alloc]init];
+                
+                jsonResult=[result mutableCopy];
+                
+                //    NSLog(@"jsonResult... : %@",jsonResult);
+                
+                NSLog(@"jsonResult count... %lu",(long)[[jsonResult valueForKey:@"infoaray"] count]);
+                
+                resultCount=(int)[[jsonResult valueForKey:@"infoaray"] count];
+                
+                resultCount-=4;
+                    
+                    //put data from url to core data in back ground thread
+                    NSOperationQueue *myQueue11 = [[NSOperationQueue alloc] init];
+                    [myQueue11 addOperationWithBlock:^{
+                        
+                        
+                        
+                        for ( NSDictionary *tempDict1 in  [jsonResult valueForKey:@"infoaray"])
+                        {
+                            NSLog(@"putting data in core data.");
+                            NSManagedObjectContext *context=[appDelegate managedObjectContext];
+                            NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"CategoryList" inManagedObjectContext:context];
+                           
+                            [manageobject setValue:[tempDict1 valueForKey:@"id"] forKey:@"categoryId"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"category_name"] forKey:@"categoryName"];
+                           
+                            [appDelegate saveContext];
+                        }
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        }];
+                    }];
+               
+                [self btnCreate];
+                
+                //Modifying buttons which are created in storyboard
+                
+                //btn1
+                
+                [btn1 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(0) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+                
+                btn1.titleLabel.adjustsFontSizeToFitWidth=YES;
+                
+                [btn1.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+                btn1.layer.borderWidth=0.5;
+                
+                [btn1 setTitleColor:[UIColor colorWithRed:(115.0f/255.0) green:(115.0f/255.0) blue:(115.0f/255.0) alpha:3] forState:UIControlStateNormal];
+                [[btn1 layer] setBorderWidth:0.5f];
+                [[btn1 layer] setBorderColor:[UIColor colorWithRed:(171.0f/255.0) green:(171.0f/255.0) blue:(171.0f/255.0) alpha:1].CGColor];
+                [btn1 setBackgroundColor:[UIColor whiteColor]];
+                
+                
+                [btn1 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+                btn1.tag=[[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(0) ]valueForKey:@"id"] integerValue];
+                
+                
+                [btn1 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+                
+                
+                //btn2
+                
+                [btn2 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(1) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+                
+                btn2.titleLabel.adjustsFontSizeToFitWidth=YES;
+                
+                [btn2.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+                btn2.layer.borderWidth=0.5;
+                
+                
+                
+                [btn2 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+                btn2.tag=[[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(1) ]valueForKey:@"id"] integerValue];
+                [btn2 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+                
+                
+                
+                //btn3
+                
+                [btn3 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(2) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+                
+                btn3.titleLabel.adjustsFontSizeToFitWidth=YES;
+                
+                [btn3.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+                btn3.layer.borderWidth=0.5;
+                
+                
+                [btn3 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+                
+                btn3.tag=[[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(2) ]valueForKey:@"id"] integerValue];
+                [btn3 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+                
+                
+                
+                
+                //btn4
+                
+                
+                [btn4 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(3) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+                
+                btn4.titleLabel.adjustsFontSizeToFitWidth=YES;
+                
+                
+                [btn4.layer setBorderColor:[[UIColor colorWithRed:(171.0f/255.0f) green:(171.0f/255.0f) blue:(171.0f/255.0f) alpha:1] CGColor]];
+                btn4.layer.borderWidth=0.5;
+                
+                
+                [btn4 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
+                btn4.tag=[[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(3) ]valueForKey:@"id"] integerValue];
+                [btn4 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
+
+                
+            }];
+        }
+        
+        
+        
+        */
+        
+        /////////////////
+        
+    
+        
+        
+        
+  
+    
+    
+    
     
     
     
@@ -254,6 +654,7 @@
 
 -(void)btnCreate
 {
+    NSLog(@"result count=%d",resultCount);
     leftframe=btn3.frame;
     rightframe=btn4.frame;
     
@@ -306,21 +707,36 @@
         
         temp1.layer.cornerRadius=20.0f;
         
-        temp1.tag=[[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"id"] integerValue];
+        if (localdata)
+        {
+            temp1.tag=[[[jsonResult objectAtIndex:(titleCount) ]valueForKey:@"categoryId"] integerValue];
+        }
+        else
+        {
+            temp1.tag=[[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"id"] integerValue];
+        }
+        
         
         [temp1 addTarget:self action:@selector(btnTapped:) forControlEvents:UIControlEventTouchUpInside];
         
         // temp1.backgroundColor=[UIColor colorWithRed:(31.0f/255.0f) green:(173.0f/255.0f) blue:(121.0f/255.0f) alpha:1];
         
         
+        if (localdata)
+        {
+            [temp1 setTitle:[[jsonResult objectAtIndex:(titleCount) ]valueForKey:@"categoryName"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [temp1 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+        }
         
         
-        [temp1 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
         
         temp1.titleLabel.adjustsFontSizeToFitWidth=YES;
         
         
-        NSLog(@"Button title: %@",[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"]);
+     //   NSLog(@"Button title: %@",[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"]);
         
         
         
@@ -351,7 +767,14 @@
             [temp2 setTitleColor:[UIColor colorWithRed:(158.0f/255.0f) green:(158.0f/255.0f) blue:(158.0f/255.0f) alpha:1] forState:UIControlStateNormal];
             
             
-            temp2.tag=[[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"id"] integerValue];
+            if (localdata)
+            {
+                temp2.tag=[[[jsonResult objectAtIndex:(titleCount) ]valueForKey:@"categoryId"] integerValue];
+            }
+            else
+            {
+                temp2.tag=[[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"id"] integerValue];
+            }
             
             
             
@@ -362,9 +785,17 @@
             // temp2.titleLabel.textColor=[UIColor whiteColor];
             
             
-            [temp2 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+            if (localdata)
+            {
+                [temp2 setTitle:[[jsonResult objectAtIndex:(titleCount) ]valueForKey:@"categoryName"] forState:UIControlStateNormal];
+            }
+            else
+            {
+                [temp2 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+            }
+
             
-            NSLog(@"Button title: %@",[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"]);
+        //    NSLog(@"Button title: %@",[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"]);
             
             temp2.titleLabel.adjustsFontSizeToFitWidth=YES;
             
