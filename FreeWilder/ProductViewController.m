@@ -86,15 +86,15 @@
         for (NSManagedObject *obj1 in fetchrequest)
         {
             
-            
+         //   NSLog(@"category id1=%@",[obj1 valueForKey:@"categoryId"]);
             if ([[obj1 valueForKey:@"categoryId"] isEqualToString:CategoryId])
             {
-                datacount++;
+               // datacount++;
                 [ArrProductList addObject:obj1];
                 lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
             }
         }
-        NSLog(@"arr count=%lu",(unsigned long)[ArrProductList count]);
+     //   NSLog(@"arr count=%lu",(unsigned long)[ArrProductList count]);
         [ProductListingTable reloadData];
         
         //check local data and url data same or not
@@ -102,48 +102,57 @@
         NSString *urlstring=[NSString stringWithFormat:@"%@app_product_details_cat?catid=%@",App_Domain_Url,[CategoryId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSLog(@"str=%@",urlstring);
        
-        NSOperationQueue *myQueue11 = [[NSOperationQueue alloc] init];
-        [myQueue11 addOperationWithBlock:^{
+       
             
         [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
-             NSInteger urldatacount;
-            //   NSLog(@"result=%@",result);
+            
+               NSLog(@"result=%@",result);
             if([[result valueForKey:@"response"] isEqualToString:@"success"])
                 
             {
-                
+     //           NSOperationQueue *myQueue2 = [[NSOperationQueue alloc] init];
+     //           [myQueue2 addOperationWithBlock:^{
+                NSMutableArray *tempArr=[[NSMutableArray alloc]init];
+                    NSInteger urldatacount;
               //  NSLog(@"result=%@",[result valueForKey:@"details"]);
-                
+                 NSLog(@"result=%@",[result objectForKey:@"details"]);
                 for ( NSDictionary *tempDict1 in  [result objectForKey:@"details"])
                 {
                     urldatacount++;
-                   // [ArrProductList addObject:tempDict1];
+                    [tempArr addObject:tempDict1];
                     
                 }
+                NSLog(@"category data count=%ld",(long)ArrProductList.count);
+                NSLog(@"url data count=%ld",(long)tempArr.count);
                 // local data and url data same
-                if (datacount==urldatacount)
+                if (ArrProductList.count==tempArr.count)
                 {
                     //do nothing
                 }
                 else
                 {
-                    //delete core data
-                    
+                    //delete the particular category data from core data
+                    NSLog(@"delete the particular category data from core data");
                     NSManagedObjectContext *context3=[appDelegate managedObjectContext];
-                    NSFetchRequest *request3=[[NSFetchRequest alloc] initWithEntityName:@"ProductList"];
-                    NSMutableArray *fetchrequest3=[[context3 executeFetchRequest:request3 error:nil] mutableCopy];
-                    for (NSManagedObject *obj3 in fetchrequest3)
+                    NSEntityDescription *productEntity=[NSEntityDescription entityForName:@"ProductList" inManagedObjectContext:context3];
+                    NSFetchRequest *fetch=[[NSFetchRequest alloc] init];
+                    [fetch setEntity:productEntity];
+                    NSPredicate *p=[NSPredicate predicateWithFormat:@"categoryId == %@", CategoryId];
+                    [fetch setPredicate:p];
+                    //... add sorts if you want them
+                    NSError *fetchError;
+                    NSError *error;
+                    NSArray *fetchedProducts=[context3 executeFetchRequest:fetch error:&fetchError];
+                    for (NSManagedObject *product in fetchedProducts)
                     {
-                        
-                        [context3 deleteObject:obj3];
-                        
-                        
+                        [context3 deleteObject:product];
                     }
+                    [context3 save:&error];
                     
                     // put url data in core data
                     for ( NSDictionary *tempDict1 in  [result objectForKey:@"details"])
                     {
-                        NSLog(@"putting image data in core data.");
+                        NSLog(@"putting data in core data.");
                         NSManagedObjectContext *context=[appDelegate managedObjectContext];
                         NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"ProductList" inManagedObjectContext:context];
                         NSLog(@"cat id=%@",CategoryId);
@@ -176,20 +185,44 @@
                         [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]]] forKey:@"userimage"];
                         [appDelegate saveContext];
                     }
+                    
+                    // data show from core data
+                    [ArrProductList removeAllObjects];
+                    NSManagedObjectContext *context5=[appDelegate managedObjectContext];
+                    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"ProductList"];
+                    NSMutableArray *fetchrequest=[[context5 executeFetchRequest:request error:nil] mutableCopy];
+                    for (NSManagedObject *obj1 in fetchrequest)
+                    {
+                        
+                        
+                        if ([[obj1 valueForKey:@"categoryId"] isEqualToString:CategoryId])
+                        {
+                            
+                            [ArrProductList addObject:obj1];
+                            lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
+                        }
+                    }
+                    
+                    [ProductListingTable reloadData];
+                    
                 }
+     //           [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    //            }];
+    //        }];
+                
             }
         }];
             
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            }];
-        }];
-    }
+            
+
+            }
     else
     {
-        [ArrProductList removeAllObjects];
-        NSLog(@"data from url");
         // core data empty
         //fire url
+        [ArrProductList removeAllObjects];
+        NSLog(@"data from url");
+        
         NSString *urlstring=[NSString stringWithFormat:@"%@app_product_details_cat?catid=%@",App_Domain_Url,[CategoryId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSLog(@"str=%@",urlstring);
         [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
@@ -199,7 +232,7 @@
                 
             {
                 
-                NSLog(@"result=%@",[result valueForKey:@"details"]);
+              //  NSLog(@"result=%@",[result valueForKey:@"details"]);
                 
                 for ( NSDictionary *tempDict1 in  [result objectForKey:@"details"])
                 {
