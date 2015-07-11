@@ -16,10 +16,10 @@
         <attribute name="productname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start_time" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userimage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="userimage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ProductList" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="CategoryList" positionX="-63" positionY="72" width="128" height="75"/>
+        <element name="ProductList" positionX="-63" positionY="-18" width="128" height="225"/>
     </elements>
 </model>
