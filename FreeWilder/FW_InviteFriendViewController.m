@@ -179,11 +179,19 @@
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }
          
-         else if (sender.tag==7)
+         else if (sender.tag==8)
          {
              NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
              [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
              FW_InviteFriendViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
+             
+             [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
+         }
+         else if (sender.tag==7)
+         {
+            
+             
+             FW_InviteFriendViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"WishlistViewControllersid"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }

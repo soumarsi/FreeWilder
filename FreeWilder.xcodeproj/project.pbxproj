@@ -11,6 +11,7 @@
 		5B76EF5E1B5131D2000380E1 /* ServiceListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B76EF5D1B5131D2000380E1 /* ServiceListingViewController.m */; };
 		5B76EF611B513344000380E1 /* ServiceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B76EF601B513344000380E1 /* ServiceListCell.m */; };
 		5B8A26CF1B469EB5007AA19F /* UrlconnectionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8A26CE1B469EB5007AA19F /* UrlconnectionObject.m */; };
+		5B8DB4171B53CF3000217498 /* WishlistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8DB4161B53CF3000217498 /* WishlistViewController.m */; };
 		5BA7B33B1B4A5ECD00B5D342 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7B31B1B4A5ECD00B5D342 /* MKAnnotationView+WebCache.m */; };
 		5BA7B33C1B4A5ECD00B5D342 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7B31D1B4A5ECD00B5D342 /* NSData+ImageContentType.m */; };
 		5BA7B33D1B4A5ECD00B5D342 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7B31F1B4A5ECD00B5D342 /* SDImageCache.m */; };
@@ -80,6 +81,8 @@
 		5B8A26CD1B469EB5007AA19F /* UrlconnectionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlconnectionObject.h; sourceTree = "<group>"; };
 		5B8A26CE1B469EB5007AA19F /* UrlconnectionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlconnectionObject.m; sourceTree = "<group>"; };
 		5B8A26D01B469F0D007AA19F /* globalprotocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globalprotocol.h; sourceTree = "<group>"; };
+		5B8DB4151B53CF3000217498 /* WishlistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistViewController.h; sourceTree = "<group>"; };
+		5B8DB4161B53CF3000217498 /* WishlistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistViewController.m; sourceTree = "<group>"; };
 		5BA7B31A1B4A5ECD00B5D342 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		5BA7B31B1B4A5ECD00B5D342 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		5BA7B31C1B4A5ECD00B5D342 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -364,6 +367,8 @@
 				A5561B1A1B1C893800182D42 /* ProductDetailsViewController.m */,
 				5B76EF5C1B5131D2000380E1 /* ServiceListingViewController.h */,
 				5B76EF5D1B5131D2000380E1 /* ServiceListingViewController.m */,
+				5B8DB4151B53CF3000217498 /* WishlistViewController.h */,
+				5B8DB4161B53CF3000217498 /* WishlistViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -531,6 +536,7 @@
 				5BA7B3431B4A5ECD00B5D342 /* SDWebImagePrefetcher.m in Sources */,
 				F9F327EC1B15B997007CB53F /* Footer.m in Sources */,
 				F900F0AE1B1C3F9200C35751 /* FindInterestsViewController.m in Sources */,
+				5B8DB4171B53CF3000217498 /* WishlistViewController.m in Sources */,
 				A5561B181B1C714E00182D42 /* ProductViewController.m in Sources */,
 				A5561B1B1B1C893800182D42 /* ProductDetailsViewController.m in Sources */,
 				5BA7B33B1B4A5ECD00B5D342 /* MKAnnotationView+WebCache.m in Sources */,
@@ -674,7 +680,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
 				INFOPLIST_FILE = FreeWilder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -688,7 +694,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
 				INFOPLIST_FILE = FreeWilder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

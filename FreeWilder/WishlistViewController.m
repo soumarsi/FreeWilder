@@ -1,19 +1,20 @@
 //
-//  ServiceListingViewController.m
+//  WishlistViewController.m
 //  FreeWilder
 //
-//  Created by Priyanka ghosh on 11/07/15.
+//  Created by Priyanka ghosh on 13/07/15.
 //  Copyright (c) 2015 Esolz Tech. All rights reserved.
 //
 
-#import "ServiceListingViewController.h"
+#import "WishlistViewController.h"
 
-@interface ServiceListingViewController ()
+@interface WishlistViewController ()<UITableViewDataSource,UITableViewDelegate,Slide_menu_delegate,footerdelegate>
 
 @end
 
-@implementation ServiceListingViewController
-@synthesize tblService,lblServiceName;
+@implementation WishlistViewController
+@synthesize lblWishlist,tblWishList;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -47,24 +48,24 @@
     
     [sidemenu.ProfileImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[prefs valueForKey:@"UserImage"]]] placeholderImage:[UIImage imageNamed:@"ProfileImage"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
     sidemenu.ProfileImage.contentMode=UIViewContentModeScaleAspectFill;
-  
+    
     sidemenu.hidden=YES;
     sidemenu.SlideDelegate=self;
     [self.view addSubview:sidemenu];
     
-   
+    
     globalobj=[[FW_JsonClass alloc]init];
-    ArrServiceList=[[NSMutableArray alloc] init];
+    ArrWishList=[[NSMutableArray alloc] init];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UserId=[prefs valueForKey:@"UserId"];
     NSLog(@"User Id=%@",UserId);
-    [self ServiceDetailUrl];
+    [self WishDetailUrl];
 }
--(void)ServiceDetailUrl
+-(void)WishDetailUrl
 {
     
     NSManagedObjectContext *context1=[appDelegate managedObjectContext];
-    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"ServiceList"];
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"WishList"];
     NSMutableArray *fetchrequest=[[context1 executeFetchRequest:request error:nil] mutableCopy];
     NSInteger CoreDataCount=[fetchrequest count];
     NSLog(@"core data count=%ld",(long)CoreDataCount);
@@ -86,10 +87,10 @@
     
     if (data)
     {
-        [ArrServiceList removeAllObjects];
+        [ArrWishList removeAllObjects];
         // data present in core data so show data from core data
         NSLog(@"data from local db");
-        NSInteger datacount;
+     //   NSInteger datacount;
         for (NSManagedObject *obj1 in fetchrequest)
         {
             
@@ -97,16 +98,16 @@
             if ([[obj1 valueForKey:@"userId"] isEqualToString:UserId])
             {
                 // datacount++;
-                [ArrServiceList addObject:obj1];
-               // lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
+                [ArrWishList addObject:obj1];
+                // lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
             }
         }
         //   NSLog(@"arr count=%lu",(unsigned long)[ArrProductList count]);
-        [tblService reloadData];
+        [tblWishList reloadData];
         
         //check local data and url data same or not
         //fire url
-        NSString *urlstring=[NSString stringWithFormat:@"%@app_user_service?userid=%@",App_Domain_Url,[UserId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSString *urlstring=[NSString stringWithFormat:@"%@app_user_wishlist?userid=%@",App_Domain_Url,[UserId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSLog(@"str=%@",urlstring);
         
         
@@ -122,17 +123,17 @@
                 NSMutableArray *tempArr=[[NSMutableArray alloc]init];
                 NSInteger urldatacount;
                 //  NSLog(@"result=%@",[result valueForKey:@"details"]);
-                NSLog(@"result=%@",[result objectForKey:@"service_details"]);
-                for ( NSDictionary *tempDict1 in  [result objectForKey:@"service_details"])
+                NSLog(@"result=%@",[result objectForKey:@"my_wishlist"]);
+                for ( NSDictionary *tempDict1 in  [result objectForKey:@"my_wishlist"])
                 {
                     urldatacount++;
                     [tempArr addObject:tempDict1];
                     
                 }
-                NSLog(@"core data count=%ld",(long)ArrServiceList.count);
+                NSLog(@"core data count=%ld",(long)ArrWishList.count);
                 NSLog(@"url data count=%ld",(long)tempArr.count);
                 // local data and url data same
-                if (ArrServiceList.count==tempArr.count)
+                if (ArrWishList.count==tempArr.count)
                 {
                     //do nothing
                 }
@@ -141,7 +142,7 @@
                     //delete the particular user data from core data
                     NSLog(@"delete the particular user id data from core data");
                     NSManagedObjectContext *context3=[appDelegate managedObjectContext];
-                    NSEntityDescription *productEntity=[NSEntityDescription entityForName:@"ServiceList" inManagedObjectContext:context3];
+                    NSEntityDescription *productEntity=[NSEntityDescription entityForName:@"WishList" inManagedObjectContext:context3];
                     NSFetchRequest *fetch=[[NSFetchRequest alloc] init];
                     [fetch setEntity:productEntity];
                     NSPredicate *p=[NSPredicate predicateWithFormat:@"userId == %@", UserId];
@@ -157,19 +158,20 @@
                     [context3 save:&error];
                     
                     // put url data in core data
-                    for ( NSDictionary *tempDict1 in  [result objectForKey:@"service_details"])
+                    for ( NSDictionary *tempDict1 in  [result objectForKey:@"my_wishlist"])
                     {
                         NSLog(@"putting data in core data.");
                         NSManagedObjectContext *context=[appDelegate managedObjectContext];
-                        NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"ServiceList" inManagedObjectContext:context];
+                        NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"WishList" inManagedObjectContext:context];
                         NSLog(@"user id=%@",UserId);
                         [manageobject setValue:UserId forKey:@"userId"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"service_id"] forKey:@"serviceId"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"service_name"] forKey:@"serviceName"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"category_details"] forKey:@"categoryDetail"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"wishlist_id"] forKey:@"wishId"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"name"] forKey:@"name"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"category"] forKey:@"category"];
                         [manageobject setValue:[tempDict1 valueForKey:@"location"] forKey:@"location"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"step_to_list"] forKey:@"stepToList"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
                         [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"image"]]]] forKey:@"image"];
+                        
                         //     UIImageView *productimgview=[[UIImageView alloc]init];
                         //    [productimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@""] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
                         
@@ -183,14 +185,14 @@
                         //     NSData *imgData1= UIImagePNGRepresentation(userimgview.image);
                         //      [manageobject setValue:imgData1 forKey:@"userimage"];
                         
-                       
+                        
                         [appDelegate saveContext];
                     }
                     
                     // data show from core data
-                    [ArrServiceList removeAllObjects];
+                    [ArrWishList removeAllObjects];
                     NSManagedObjectContext *context5=[appDelegate managedObjectContext];
-                    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"ServiceList"];
+                    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"WishList"];
                     NSMutableArray *fetchrequest=[[context5 executeFetchRequest:request error:nil] mutableCopy];
                     for (NSManagedObject *obj1 in fetchrequest)
                     {
@@ -199,12 +201,12 @@
                         if ([[obj1 valueForKey:@"userId"] isEqualToString:UserId])
                         {
                             
-                            [ArrServiceList addObject:obj1];
-                         //   lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
+                            [ArrWishList addObject:obj1];
+                            //   lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
                         }
                     }
                     
-                    [tblService reloadData];
+                    [tblWishList reloadData];
                     
                     
                     
@@ -224,10 +226,10 @@
     {
         // core data empty
         //fire url
-        [ArrServiceList removeAllObjects];
+        [ArrWishList removeAllObjects];
         NSLog(@"data from url");
         
-        NSString *urlstring=[NSString stringWithFormat:@"%@app_user_service?userid=%@",App_Domain_Url,[UserId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSString *urlstring=[NSString stringWithFormat:@"%@app_user_wishlist?userid=%@",App_Domain_Url,[UserId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSLog(@"str=%@",urlstring);
         [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
             
@@ -238,14 +240,14 @@
                 
                 //  NSLog(@"result=%@",[result valueForKey:@"details"]);
                 
-                for ( NSDictionary *tempDict1 in  [result objectForKey:@"service_details"])
+                for ( NSDictionary *tempDict1 in  [result objectForKey:@"my_wishlist"])
                 {
-                    [ArrServiceList addObject:tempDict1];
+                    [ArrWishList addObject:tempDict1];
                     
                 }
-            //    lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"category_name"];
+                //    lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"category_name"];
                 
-                [tblService reloadData];
+                [tblWishList reloadData];
                 
                 //put data from url to core data in back ground thread
                 NSOperationQueue *myQueue11 = [[NSOperationQueue alloc] init];
@@ -253,19 +255,19 @@
                     
                     
                     
-                    for ( NSDictionary *tempDict1 in  [result objectForKey:@"service_details"])
+                    for ( NSDictionary *tempDict1 in  [result objectForKey:@"my_wishlist"])
                     {
                         NSLog(@"putting image data in core data.");
                         NSManagedObjectContext *context=[appDelegate managedObjectContext];
-                        NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"ServiceList" inManagedObjectContext:context];
+                        NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"WishList" inManagedObjectContext:context];
                         NSLog(@"user id=%@",UserId);
                         [manageobject setValue:UserId forKey:@"userId"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"service_id"] forKey:@"serviceId"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"service_name"] forKey:@"serviceName"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"category_details"] forKey:@"categoryDetail"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"wishlist_id"] forKey:@"wishId"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"name"] forKey:@"name"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"category"] forKey:@"category"];
                         [manageobject setValue:[tempDict1 valueForKey:@"location"] forKey:@"location"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"step_to_list"] forKey:@"stepToList"];
-                        [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"image"]]]] forKey:@"image"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
+                         [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"image"]]]] forKey:@"image"];
                         //     UIImageView *productimgview=[[UIImageView alloc]init];
                         //    [productimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@""] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
                         
@@ -279,7 +281,7 @@
                         //     NSData *imgData1= UIImagePNGRepresentation(userimgview.image);
                         //      [manageobject setValue:imgData1 forKey:@"userimage"];
                         
-                       
+                        
                         [appDelegate saveContext];
                     }
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -288,7 +290,7 @@
             }
             else
             {
-                lblServiceName.text=@"No Service Found";
+                lblWishlist.text=@"No Data Found";
                 NSLog(@"no service");
                 //  UIAlertView *loginAlert=[[UIAlertView alloc]initWithTitle:@"Failed" message:[result valueForKey:@"message" ] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 //  [loginAlert show];
@@ -301,38 +303,28 @@
         }];
     }
     
-    if (ArrServiceList.count==0)
+    if (ArrWishList.count==0)
     {
-        lblServiceName.text=@"No Service Found";
+        lblWishlist.text=@"No Data Found";
         NSLog(@"no service");
     }
     else
     {
-         lblServiceName.text=@"";
+        lblWishlist.text=@"";
     }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     /*
-    ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Product_details"];
-    
-    [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
-    */
+     ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Product_details"];
+     
+     [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
+     */
 }
 
 
@@ -346,14 +338,16 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //  NSLog(@"arr count1=%lu",(unsigned long)[ArrProductList count]);
-    return [ArrServiceList count];
+    return [ArrWishList count];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ServiceListCell *cell=(ServiceListCell *)[tableView dequeueReusableCellWithIdentifier:@"ServiceListCell"];
     cell.btnBooking.layer.cornerRadius=15.0f;
     cell.btnEdit.layer.cornerRadius=15.0f;
-    cell.lblLocation.text=[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"location"];
+    cell.btnEdit.hidden=YES;
+    [cell.btnBooking setTitle:@"Remove" forState:UIControlStateNormal];
+    cell.lblLocation.text=[[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"location"];
     if (cell.lblLocation.text.length==0)
     {
         cell.locationImg.hidden=YES;
@@ -365,16 +359,17 @@
     if (data)
     {
         //showing data from core data
-        cell.ServiceName.text=[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"serviceName"];
-        cell.CategoryDetail.text=[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"categoryDetail"];
-        
+        cell.ServiceName.text=[[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"name"];
+        cell.CategoryDetail.text=[[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"category"];
+        cell.lblPrice.hidden=NO;
+        cell.lblPrice.text=[[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"price"];
         //product image
-        NSData *dataBytes = [[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"image"];
+        NSData *dataBytes = [[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"image"];
         cell.ServiceImg.image=[UIImage imageWithData:dataBytes];
         
         cell.ServiceImg.contentMode=UIViewContentModeScaleAspectFill;
         cell.ServiceImg.clipsToBounds = YES;
-
+     /*
         if ([[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"stepToList"] isEqualToString:@"0  "])
         {
             [cell.btnEdit setTitle:@"Edit" forState:UIControlStateNormal];
@@ -384,30 +379,50 @@
             [cell.btnEdit setTitle:[[[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"stepToList"] substringWithRange:NSMakeRange(0, 2)] stringByAppendingString:@"Step to list"] forState:UIControlStateNormal];
             
         }
+      */
         
     }
     else
     {
-        cell.ServiceName.text=[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"service_name"];
-        cell.CategoryDetail.text=[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"category_details"];
-        
-        [cell.ServiceImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"image"]]] placeholderImage:[UIImage imageNamed:@"PlaceholderImg"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+        cell.ServiceName.text=[[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"name"];
+        cell.CategoryDetail.text=[[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"category"];
+        cell.lblPrice.hidden=NO;
+        cell.lblPrice.text=[[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"price"];
+        //product image
+        [cell.ServiceImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[ArrWishList objectAtIndex:indexPath.row] valueForKey:@"image"]]] placeholderImage:[UIImage imageNamed:@"PlaceholderImg"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
         cell.ServiceImg.contentMode=UIViewContentModeScaleAspectFill;
         cell.ServiceImg.clipsToBounds = YES;
+        //product image
+        //    NSData *dataBytes = [[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"image"];
+        //    cell.ServiceImg.image=[UIImage imageWithData:dataBytes];
         
-        if ([[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"step_to_list"] isEqualToString:@"0  "])
-        {
-            [cell.btnEdit setTitle:@"Edit" forState:UIControlStateNormal];
-        }
-        else
-        {
-            [cell.btnEdit setTitle:[[[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"step_to_list"] substringWithRange:NSMakeRange(0, 2)] stringByAppendingString:@"Step to list"] forState:UIControlStateNormal];
-            
-        }
+        //     cell.ServiceImg.contentMode=UIViewContentModeScaleAspectFill;
+        //     cell.ServiceImg.clipsToBounds = YES;
+        /*
+         if ([[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"stepToList"] isEqualToString:@"0  "])
+         {
+         [cell.btnEdit setTitle:@"Edit" forState:UIControlStateNormal];
+         }
+         else
+         {
+         [cell.btnEdit setTitle:[[[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"stepToList"] substringWithRange:NSMakeRange(0, 2)] stringByAppendingString:@"Step to list"] forState:UIControlStateNormal];
+         
+         }
+         */
         
     }
     return cell;
 }
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 - (IBAction)BackClick:(id)sender
 {
     [self POPViewController];
@@ -451,28 +466,28 @@
     else if (sender.tag==4)
     {
         
-        ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"add_service_page"];
+        WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"add_service_page"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
     else if (sender.tag==3)
     {
         
-        ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"msg_page"];
+        WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"msg_page"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
     else if (sender.tag==2)
     {
         
-        ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"search_page"];
+        WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"search_page"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
     else if (sender.tag==1)
     {
         
-        ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Interest_page"];
+        WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Interest_page"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
@@ -526,7 +541,7 @@
          
          if (sender.tag==1)
          {
-             ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Invite_Friend"];
+             WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Invite_Friend"];
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }
          
@@ -534,22 +549,31 @@
          {
              NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
              [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-
-             ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
+             
+             WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }
+         else if (sender.tag==5)
+         {
+             
+             WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"ServiceListingViewControllersid"];
+             
+             [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
+         }
+         /*
          else if (sender.tag==7)
          {
              
-             ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"WishlistViewControllersid"];
+             WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"WishlistViewControllersid"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }
+          */
          else if (sender.tag==3)
          {
              
-             ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Edit_profile_page"];
+             WishlistViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Edit_profile_page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }
@@ -567,10 +591,5 @@
     [Transition setType:AnimationType];
     [[[[self navigationController] view] layer] addAnimation:Transition forKey:nil];
     [[self navigationController] pushViewController:viewController animated:NO];
-}
-- (IBAction)AddClick:(id)sender
-{
-    ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"add_service_page"];
-    [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
 }
 @end

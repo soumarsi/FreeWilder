@@ -15,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;
 @property (weak, nonatomic) IBOutlet UIButton *btnEdit;
 @property (weak, nonatomic) IBOutlet UIButton *btnBooking;
+@property (weak, nonatomic) IBOutlet UIImageView *locationImg;
+@property (weak, nonatomic) IBOutlet UILabel *lblPrice;
 
 @end
