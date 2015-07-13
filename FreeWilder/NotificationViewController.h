@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Side_menu.h"
-
+#import "UIImageView+WebCache.h"
 @interface NotificationViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,Slide_menu_delegate>
 {
     // Creating Side menu object

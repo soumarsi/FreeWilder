@@ -35,7 +35,7 @@
     [_footer_base addSubview:footer];
     
     
-    /// Getting side from Xiv & creating a black overlay
+    /// Getting side from Xib & creating a black overlay
     
     overlay=[[UIView alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     overlay.backgroundColor=[[UIColor blackColor]colorWithAlphaComponent:.6];
@@ -155,7 +155,7 @@
     else if (sender.tag==1)
     {
         
-        EditProfileViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Dashboard"];
+        EditProfileViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Interest_page"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
@@ -211,6 +211,8 @@
          
          else if (sender.tag==7)
          {
+             NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+             [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
              EditProfileViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
@@ -219,6 +221,13 @@
          {
              
              EditProfileViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Edit_profile_page"];
+             
+             [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
+         }
+         else if (sender.tag==5)
+         {
+             
+             EditProfileViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"ServiceListingViewControllersid"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }

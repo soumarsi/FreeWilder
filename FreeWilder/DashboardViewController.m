@@ -884,7 +884,8 @@
     }
     ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Product_Page"];
     obj.CategoryId=[NSString stringWithFormat:@"%ld",(long)tappedBtn.tag];
-    [self.navigationController pushViewController:obj animated:YES];
+ //   [self.navigationController pushViewController:obj animated:YES];
+    [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
     
 }
 
@@ -944,7 +945,7 @@
     else if (sender.tag==1)
     {
         
-        DashboardViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Dashboard"];
+        DashboardViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Interest_page"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
@@ -1007,6 +1008,8 @@
          
          else if (sender.tag==7)
          {
+             NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+             [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
              DashboardViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];

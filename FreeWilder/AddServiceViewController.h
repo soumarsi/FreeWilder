@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Side_menu.h"
+#import "UIImageView+WebCache.h"
 @interface AddServiceViewController : UIViewController<UITextFieldDelegate,UITextViewDelegate,Slide_menu_delegate>
 
 {

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Side_menu.h"
+#import "UIImageView+WebCache.h"
 
 @interface FW_InviteFriendViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,Slide_menu_delegate>
 {

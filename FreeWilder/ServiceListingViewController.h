@@ -13,18 +13,22 @@
 #import "AppDelegate.h"
 #import "ServiceListCell.h"
 #import "Footer.h"
-@interface ServiceListingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,Slide_menu_delegate>
+@interface ServiceListingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,Slide_menu_delegate,footerdelegate>
 {
     // Creating Side menu object
     
     Side_menu *sidemenu;
     UIView *overlay;
     FW_JsonClass *globalobj;
-    NSMutableArray *ArrProductList;
+    NSMutableArray *ArrServiceList;
     AppDelegate *appDelegate;
     bool data;
+    NSString *UserId;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tblService;
 - (IBAction)BackClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *footer_base;
+- (IBAction)AddClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *lblServiceName;
 
 @end

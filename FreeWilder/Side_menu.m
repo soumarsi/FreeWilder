@@ -26,6 +26,8 @@
     {
         self=[[[NSBundle mainBundle] loadNibNamed:@"Side_menu" owner:self options:nil]objectAtIndex:0];
     }
+    self.ProfileImage.layer.cornerRadius=self.ProfileImage.frame.size.height/2.0;
+     self.ProfileImage.clipsToBounds = YES;
     return self;
 }
 

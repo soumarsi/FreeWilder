@@ -51,9 +51,9 @@
     globalobj=[[FW_JsonClass alloc]init];
     ArrProductList=[[NSMutableArray alloc] init];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self ProfileDetailUrl];
+    [self ProductDetailUrl];
 }
--(void)ProfileDetailUrl
+-(void)ProductDetailUrl
 {
     
     NSManagedObjectContext *context1=[appDelegate managedObjectContext];
@@ -355,7 +355,7 @@
     else if (sender.tag==1)
     {
         
-        ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Dashboard"];
+        ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Interest_page"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
@@ -415,6 +415,8 @@
          
          else if (sender.tag==7)
          {
+             NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+             [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
              ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
@@ -423,6 +425,13 @@
          {
              
              ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Edit_profile_page"];
+             
+             [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
+         }
+         else if (sender.tag==5)
+         {
+             
+             ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"ServiceListingViewControllersid"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }
@@ -483,6 +492,8 @@
         cell.ProductImage.image=[UIImage imageWithData:dataBytes];
         
         cell.ProductImage.contentMode=UIViewContentModeScaleAspectFill;
+        cell.ProductImage.clipsToBounds = YES;
+
         
         //product cost
         NSString *priceSign;
@@ -558,6 +569,7 @@
    
    [cell.ProductImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@"PlaceholderImg"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
     cell.ProductImage.contentMode=UIViewContentModeScaleAspectFill;
+         cell.ProductImage.clipsToBounds = YES;
     
     //product cost
     NSString *priceSign;

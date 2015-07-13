@@ -695,6 +695,7 @@
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
+    /*
     else if (sender.tag==1)
     {
         
@@ -702,6 +703,7 @@
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
+     */
     
     
     
@@ -760,6 +762,9 @@
          
          else if (sender.tag==7)
          {
+             NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+             [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+
              FindInterestsViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
@@ -768,6 +773,13 @@
          {
              
              FindInterestsViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Edit_profile_page"];
+             
+             [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
+         }
+         else if (sender.tag==5)
+         {
+             
+             FindInterestsViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"ServiceListingViewControllersid"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }

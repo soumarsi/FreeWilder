@@ -44,6 +44,12 @@
     
     sidemenu=[[Side_menu alloc]init];
     sidemenu.frame=CGRectMake([UIScreen mainScreen].bounds.size.width,0,sidemenu.frame.size.width,[UIScreen mainScreen].bounds.size.height);
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    //  NSLog(@"user name=%@",[prefs valueForKey:@"UserName"]);
+    sidemenu.lblUserName.text=[prefs valueForKey:@"UserName"];
+    
+    [sidemenu.ProfileImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[prefs valueForKey:@"UserImage"]]] placeholderImage:[UIImage imageNamed:@"ProfileImage"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+    sidemenu.ProfileImage.contentMode=UIViewContentModeScaleAspectFit;
     sidemenu.hidden=YES;
     sidemenu.SlideDelegate=self;
     [self.view addSubview:sidemenu];
@@ -101,7 +107,7 @@
     else if (sender.tag==1)
     {
         
-        NotificationViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Dashboard"];
+        NotificationViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Interest_page"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
@@ -163,6 +169,9 @@
          
          else if (sender.tag==7)
          {
+             NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+             [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+
              NotificationViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
@@ -171,6 +180,13 @@
          {
              
              NotificationViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Edit_profile_page"];
+             
+             [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
+         }
+         else if (sender.tag==5)
+         {
+             
+             NotificationViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"ServiceListingViewControllersid"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
          }
