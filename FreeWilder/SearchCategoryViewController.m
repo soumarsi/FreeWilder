@@ -56,7 +56,7 @@
     sidemenu.lblUserName.text=[prefs valueForKey:@"UserName"];
     
     [sidemenu.ProfileImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[prefs valueForKey:@"UserImage"]]] placeholderImage:[UIImage imageNamed:@"ProfileImage"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
-    sidemenu.ProfileImage.contentMode=UIViewContentModeScaleAspectFit;
+  //  sidemenu.ProfileImage.contentMode=UIViewContentModeScaleAspectFit;
     
     sidemenu.hidden=YES;
     sidemenu.SlideDelegate=self;
@@ -109,7 +109,7 @@
     else if (sender.tag==2)
     {
         
-        SearchCategoryViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"search_page"];
+        SearchCategoryViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"SearchProductViewControllersid"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }

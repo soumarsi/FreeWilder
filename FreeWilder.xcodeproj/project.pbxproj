@@ -10,6 +10,8 @@
 		156DFDDE1B43BECA00D3F784 /* ForgotpasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156DFDDD1B43BECA00D3F784 /* ForgotpasswordViewController.m */; };
 		5B76EF5E1B5131D2000380E1 /* ServiceListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B76EF5D1B5131D2000380E1 /* ServiceListingViewController.m */; };
 		5B76EF611B513344000380E1 /* ServiceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B76EF601B513344000380E1 /* ServiceListCell.m */; };
+		5B7E66331B54CE3100D760EC /* SearchProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E66321B54CE3100D760EC /* SearchProductViewController.m */; };
+		5B7E66361B54EC3F00D760EC /* CKCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E66351B54EC3F00D760EC /* CKCalendarView.m */; };
 		5B8A26CF1B469EB5007AA19F /* UrlconnectionObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8A26CE1B469EB5007AA19F /* UrlconnectionObject.m */; };
 		5B8DB4171B53CF3000217498 /* WishlistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8DB4161B53CF3000217498 /* WishlistViewController.m */; };
 		5BA7B33B1B4A5ECD00B5D342 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA7B31B1B4A5ECD00B5D342 /* MKAnnotationView+WebCache.m */; };
@@ -78,6 +80,10 @@
 		5B76EF5D1B5131D2000380E1 /* ServiceListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListingViewController.m; sourceTree = "<group>"; };
 		5B76EF5F1B513344000380E1 /* ServiceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListCell.h; sourceTree = "<group>"; };
 		5B76EF601B513344000380E1 /* ServiceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListCell.m; sourceTree = "<group>"; };
+		5B7E66311B54CE3100D760EC /* SearchProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchProductViewController.h; sourceTree = "<group>"; };
+		5B7E66321B54CE3100D760EC /* SearchProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchProductViewController.m; sourceTree = "<group>"; };
+		5B7E66341B54EC3F00D760EC /* CKCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKCalendarView.h; sourceTree = "<group>"; };
+		5B7E66351B54EC3F00D760EC /* CKCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKCalendarView.m; sourceTree = "<group>"; };
 		5B8A26CD1B469EB5007AA19F /* UrlconnectionObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlconnectionObject.h; sourceTree = "<group>"; };
 		5B8A26CE1B469EB5007AA19F /* UrlconnectionObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlconnectionObject.m; sourceTree = "<group>"; };
 		5B8A26D01B469F0D007AA19F /* globalprotocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globalprotocol.h; sourceTree = "<group>"; };
@@ -304,6 +310,8 @@
 		F98741801B157B7200CDAD0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B7E66341B54EC3F00D760EC /* CKCalendarView.h */,
+				5B7E66351B54EC3F00D760EC /* CKCalendarView.m */,
 				5BA7B3191B4A5ECD00B5D342 /* SDWebImage */,
 				F98741A91B157DE800CDAD0F /* Fonts */,
 				F98741811B157B7200CDAD0F /* Info.plist */,
@@ -369,6 +377,8 @@
 				5B76EF5D1B5131D2000380E1 /* ServiceListingViewController.m */,
 				5B8DB4151B53CF3000217498 /* WishlistViewController.h */,
 				5B8DB4161B53CF3000217498 /* WishlistViewController.m */,
+				5B7E66311B54CE3100D760EC /* SearchProductViewController.h */,
+				5B7E66321B54CE3100D760EC /* SearchProductViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -455,6 +465,7 @@
 					};
 					F98741981B157B7200CDAD0F = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = HVFEBCENV9;
 						TestTargetID = F987417C1B157B7200CDAD0F;
 					};
 				};
@@ -518,6 +529,7 @@
 				F9F327E61B1593A9007CB53F /* SignUpViewController.m in Sources */,
 				5BA7B33E1B4A5ECD00B5D342 /* SDWebImageCompat.m in Sources */,
 				5BA7B3411B4A5ECD00B5D342 /* SDWebImageDownloaderOperation.m in Sources */,
+				5B7E66331B54CE3100D760EC /* SearchProductViewController.m in Sources */,
 				F900F0B11B1C542F00C35751 /* AddServiceViewController.m in Sources */,
 				F98741861B157B7200CDAD0F /* AppDelegate.m in Sources */,
 				5B76EF5E1B5131D2000380E1 /* ServiceListingViewController.m in Sources */,
@@ -538,6 +550,7 @@
 				F900F0AE1B1C3F9200C35751 /* FindInterestsViewController.m in Sources */,
 				5B8DB4171B53CF3000217498 /* WishlistViewController.m in Sources */,
 				A5561B181B1C714E00182D42 /* ProductViewController.m in Sources */,
+				5B7E66361B54EC3F00D760EC /* CKCalendarView.m in Sources */,
 				A5561B1B1B1C893800182D42 /* ProductDetailsViewController.m in Sources */,
 				5BA7B33B1B4A5ECD00B5D342 /* MKAnnotationView+WebCache.m in Sources */,
 				84B35B481B20292B00F5B6FE /* SearchCategoryViewController.m in Sources */,
@@ -708,6 +721,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -719,6 +734,7 @@
 				INFOPLIST_FILE = FreeWilderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeWilder.app/FreeWilder";
 			};
 			name = Debug;
@@ -727,6 +743,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -734,6 +752,7 @@
 				INFOPLIST_FILE = FreeWilderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeWilder.app/FreeWilder";
 			};
 			name = Release;

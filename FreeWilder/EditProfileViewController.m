@@ -56,7 +56,7 @@
     sidemenu.lblUserName.text=[prefs valueForKey:@"UserName"];
     
     [sidemenu.ProfileImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[prefs valueForKey:@"UserImage"]]] placeholderImage:[UIImage imageNamed:@"ProfileImage"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
-    sidemenu.ProfileImage.contentMode=UIViewContentModeScaleAspectFit;
+ //   sidemenu.ProfileImage.contentMode=UIViewContentModeScaleAspectFit;
     sidemenu.hidden=YES;
     sidemenu.SlideDelegate=self;
     [self.view addSubview:sidemenu];
@@ -91,6 +91,16 @@
             {
                 txtPhone.text=[result valueForKey:@"ph"];
             }
+            
+         /*
+            ProfileImg.layer.cornerRadius = ProfileImg.frame.size.height/2;
+            ProfileImg.clipsToBounds = YES;
+           ProfileImg.userInteractionEnabled=YES;
+            ProfileImg.layer.borderColor=[UIColor whiteColor].CGColor;
+            ProfileImg.layer.borderWidth=1.5;
+            ProfileImg.contentMode=UIViewContentModeScaleAspectFill;
+          */
+         //   [ProfileImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[result valueForKey:@"image"]]] placeholderImage:[UIImage imageNamed:@"demo_image"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
             
         }
         else
@@ -148,7 +158,7 @@
     else if (sender.tag==2)
     {
         
-        EditProfileViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"search_page"];
+        EditProfileViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"SearchProductViewControllersid"];
         [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
         
     }
