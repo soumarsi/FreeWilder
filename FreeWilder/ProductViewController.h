@@ -23,6 +23,7 @@
 - (IBAction)back_button:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblCategoryName;
 @property (weak, nonatomic) IBOutlet UITableView *ProductListingTable;
+@property (weak, nonatomic) IBOutlet UILabel *lblPageTitle;
 
 
 @end

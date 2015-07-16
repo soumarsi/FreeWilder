@@ -23,7 +23,7 @@
 @end
 
 @implementation FW_InviteFriendViewController
-
+@synthesize lblInviteFriend,btnSend;
 - (void)viewDidLoad {
     [super viewDidLoad];
     i=0;
@@ -66,6 +66,9 @@
     sidemenu.SlideDelegate=self;
     [self.view addSubview:sidemenu];
 
+    lblInviteFriend.text=@"Invite Friend";
+    [btnSend setTitle:@"Send" forState:UIControlStateNormal];
+    _searchtextfield.placeholder=@"Search";
 }
 
 -(void)pushmethod:(UIButton *)sender

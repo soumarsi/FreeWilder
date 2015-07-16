@@ -56,7 +56,7 @@
 
 @implementation DashboardViewController
 
-@synthesize scroll,jsonResult;
+@synthesize scroll,jsonResult,lbl2nddummyText,lblDummyText,lblfindinterest,lblhaveBusiness,lblOr,btnGetStarted;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -135,6 +135,13 @@
     sidemenu.SlideDelegate=self;
     [self.view addSubview:sidemenu];
     
+    lblhaveBusiness.text=@"DO YOU HAVE A BUSINESS?";
+    lblOr.text=@"OR";
+    lblDummyText.text=@"Lorem Ipsum is simply dummy text";
+    lbl2nddummyText.text=@"Lorem Ipsum is simply dummy text";
+    lblfindinterest.text=@"FIND YOUR INTERESTS";
+    [btnGetStarted setTitle:@"Get Started" forState:UIControlStateNormal];
+    [moreBtn setTitle:@"More" forState:UIControlStateNormal];
 }
 
 

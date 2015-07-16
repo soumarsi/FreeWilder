@@ -29,5 +29,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblWishlist;
 @property (weak, nonatomic) IBOutlet UITableView *tblWishList;
 @property (weak, nonatomic) IBOutlet UIView *footer_base;
+@property (weak, nonatomic) IBOutlet UILabel *lblPageTitle;
 
 @end

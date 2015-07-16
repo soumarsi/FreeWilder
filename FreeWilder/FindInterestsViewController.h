@@ -24,5 +24,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *home;
 @property (weak, nonatomic) IBOutlet UIButton *video;
+@property (weak, nonatomic) IBOutlet UILabel *lblPageTitle;
 
 @end

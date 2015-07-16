@@ -29,7 +29,7 @@
 
 @implementation ViewController
 
-@synthesize email,password;
+@synthesize email,password,lbldontHaveAccount,lblFacebook,lblLogin,btnSignUp,btnForgetPassword,btnlogin;
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -43,6 +43,15 @@
     _jsonResult = [[NSMutableArray alloc]init];
     forgotArray = [[NSMutableArray alloc]init];
     
+    email.placeholder=@"Username";
+    password.placeholder=@"Password";
+    lblLogin.text=@"Login with your";
+    lblFacebook.text=@"Facebook";
+    lbldontHaveAccount.text=@"Don't have an account ?";
+    
+    [btnSignUp setTitle:@"Sign up" forState:UIControlStateNormal];
+    [btnForgetPassword setTitle:@"Forgot Password?" forState:UIControlStateNormal];
+    [btnlogin setTitle:@"LOG IN" forState:UIControlStateNormal];
     
     // Do any additional setup after loading the view, typically from a nib.
 }

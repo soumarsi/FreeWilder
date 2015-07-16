@@ -17,5 +17,7 @@
     UIView *overlay;
 }
 @property (strong, nonatomic) IBOutlet UIView *footer_base;
+@property (weak, nonatomic) IBOutlet UIButton *btnMessage;
+@property (weak, nonatomic) IBOutlet UIButton *btnnotification;
 
 @end

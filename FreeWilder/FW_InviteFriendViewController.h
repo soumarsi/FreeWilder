@@ -24,5 +24,7 @@
 
 - (IBAction)Back_button_action:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblInviteFriend;
+@property (weak, nonatomic) IBOutlet UIButton *btnSend;
 
 @end

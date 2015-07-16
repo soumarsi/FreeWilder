@@ -13,7 +13,7 @@
 @end
 
 @implementation WishlistViewController
-@synthesize lblWishlist,tblWishList;
+@synthesize lblWishlist,tblWishList,lblPageTitle;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,6 +59,8 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UserId=[prefs valueForKey:@"UserId"];
     NSLog(@"User Id=%@",UserId);
+    
+    lblPageTitle.text=@"My Wishlist";
     [self WishDetailUrl];
 }
 -(void)WishDetailUrl

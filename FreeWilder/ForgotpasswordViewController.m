@@ -22,7 +22,8 @@
     
     [submit setBackgroundColor:[UIColor colorWithRed:102/255.f green:82/255.f blue:99/255.f alpha:1]];
     
-    
+    forgot_Password.placeholder=@"Email ID";
+    submit.text=@"SUBMIT";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,7 +78,8 @@
                  
              }
              
-             else{
+             else
+             {
                  
                  forgot_Password.text = @"";
                  UIAlertView *objAlert = [[UIAlertView alloc] initWithTitle:[forgotArray valueForKey:@"response"] message:[forgotArray valueForKey:@"message"] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK",nil];

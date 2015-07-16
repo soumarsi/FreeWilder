@@ -13,7 +13,7 @@
 @end
 
 @implementation ServiceListingViewController
-@synthesize tblService,lblServiceName;
+@synthesize tblService,lblServiceName,lblPageTitle,btnAdd;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -58,6 +58,9 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     UserId=[prefs valueForKey:@"UserId"];
     NSLog(@"User Id=%@",UserId);
+    
+    lblPageTitle.text=@"Service Listing";
+    [btnAdd setTitle:@"Add" forState:UIControlStateNormal];
     [self ServiceDetailUrl];
 }
 -(void)ServiceDetailUrl
@@ -354,6 +357,7 @@
     cell.btnBooking.layer.cornerRadius=15.0f;
     cell.btnEdit.layer.cornerRadius=15.0f;
     cell.lblLocation.text=[[ArrServiceList objectAtIndex:indexPath.row] valueForKey:@"location"];
+    [cell.btnBooking setTitle:@"View Booking" forState:UIControlStateNormal];
     if (cell.lblLocation.text.length==0)
     {
         cell.locationImg.hidden=YES;

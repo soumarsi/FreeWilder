@@ -10,7 +10,7 @@
 @end
 
 @implementation ProductViewController
-@synthesize CategoryId,lblCategoryName,ProductListingTable;
+@synthesize CategoryId,lblCategoryName,ProductListingTable,lblPageTitle;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -51,6 +51,8 @@
     globalobj=[[FW_JsonClass alloc]init];
     ArrProductList=[[NSMutableArray alloc] init];
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    lblPageTitle.text=@"Product Listing";
     [self ProductDetailUrl];
 }
 -(void)ProductDetailUrl

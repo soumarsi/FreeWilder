@@ -9,12 +9,12 @@
 #import "EditProfileViewController.h"
 #import "Footer.h"
 #import "Side_menu.h"
-@interface EditProfileViewController ()<footerdelegate>
+@interface EditProfileViewController ()<footerdelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate>
 
 @end
 
 @implementation EditProfileViewController
-@synthesize txtEmail,txtUserName,txtPhone,lblUserName,ProfileImg,mainscroll;
+@synthesize txtEmail,txtUserName,txtPhone,lblUserName,ProfileImg,mainscroll,lblPagetitle,btnSave;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -66,6 +66,9 @@
     UserId=[prefs valueForKey:@"UserId"];
     //  NSLog(@"userid=%@",UserId);
     
+    [btnSave setTitle:@"Save" forState:UIControlStateNormal];
+    lblPagetitle.text=@"Edit Profile";
+    
     [self ProfileDetailUrl];
     
 }
@@ -92,15 +95,15 @@
                 txtPhone.text=[result valueForKey:@"ph"];
             }
             
-         /*
-            ProfileImg.layer.cornerRadius = ProfileImg.frame.size.height/2;
-            ProfileImg.clipsToBounds = YES;
+         
+           
+           
            ProfileImg.userInteractionEnabled=YES;
-            ProfileImg.layer.borderColor=[UIColor whiteColor].CGColor;
-            ProfileImg.layer.borderWidth=1.5;
+                    [ProfileImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[result valueForKey:@"image"]]] placeholderImage:[UIImage imageNamed:@"demo_image"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
             ProfileImg.contentMode=UIViewContentModeScaleAspectFill;
-          */
-         //   [ProfileImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[result valueForKey:@"image"]]] placeholderImage:[UIImage imageNamed:@"demo_image"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+             ProfileImg.clipsToBounds = YES;
+             ProfileImg.layer.cornerRadius = ProfileImg.frame.size.width/2;
+
             
         }
         else
@@ -373,7 +376,7 @@
                                                            {
                                                             //   NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
             id  result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                                                             //  NSLog(@"Data = %@",result);
+                                                               NSLog(@"Data = %@",result);
                                                                if([[result valueForKey:@"response"] isEqualToString:@"Success"])
                                                                    
                                                                {
@@ -382,6 +385,7 @@
                                                                    lblUserName.text=[result valueForKey:@"name"];
                                                                    txtUserName.text=[result valueForKey:@"name"];
                                                                    txtEmail.text=[result valueForKey:@"email"];
+                                                                    [[NSUserDefaults standardUserDefaults] setObject:[result valueForKey:@"name"]  forKey:@"UserName"];
                                                                    //   NSLog(@"ph=%@",[result valueForKey:@"ph"]);
                                                                    if ([[NSString stringWithFormat:@"%@",[result valueForKey:@"ph"]] isEqualToString:@"<null>"])
                                                                    {
@@ -493,4 +497,52 @@
     }
 */
 }
+- (IBAction)ImageClick:(id)sender
+{
+    actionsheet=[[UIActionSheet alloc]initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+    [actionsheet showInView:self.view];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    picker.delegate = (id)self;
+    picker.allowsEditing = YES;
+    
+    switch (buttonIndex) {
+            
+        case 0:
+            
+            
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self.navigationController presentViewController:picker animated:YES completion:NULL];
+            
+            break;
+            
+        case 1:
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self.navigationController presentViewController:picker animated:YES completion:NULL];
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    ProfileImg.image=info[UIImagePickerControllerEditedImage];
+    ProfileImg.contentMode=UIViewContentModeScaleAspectFill;
+    ProfileImg.clipsToBounds = YES;
+    ProfileImg.layer.cornerRadius = ProfileImg.frame.size.width/2;
+   
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    
+    
+    
+}
+
 @end

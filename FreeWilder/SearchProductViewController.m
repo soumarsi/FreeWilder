@@ -13,7 +13,7 @@
 @end
 
 @implementation SearchProductViewController
-@synthesize txtPreductName,txtLocation,LocationView,btnDate,btnTime,btnSearch,SearchTable,txtDays,txtTime,btnBack,lblProduct;
+@synthesize txtPreductName,txtLocation,LocationView,btnDate,btnTime,btnSearch,SearchTable,txtDays,txtTime,btnBack,lblProduct,lblPageTitle;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -78,6 +78,13 @@
     
     globalobj=[[FW_JsonClass alloc]init];
     ArrSearchList=[[NSMutableArray alloc] init];
+    
+    txtPreductName.placeholder=@"Enter a Business or Service";
+    txtLocation.placeholder=@"Location";
+    txtDays.placeholder=@"All Days";
+    txtTime.placeholder=@"All Times";
+    [btnSearch setTitle:@"SEARCH" forState:UIControlStateNormal];
+    lblPageTitle.text=@"Product Search";
 }
 
 - (void)didReceiveMemoryWarning {

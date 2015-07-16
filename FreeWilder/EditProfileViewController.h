@@ -19,6 +19,7 @@
     FW_JsonClass *globalobj;
     UrlconnectionObject *urlobj;
     NSString *UserId;
+    UIActionSheet *actionsheet;
 }
 @property (strong, nonatomic) IBOutlet UIView *footer_base;
 - (IBAction)back_button:(id)sender;
@@ -29,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPhone;
 - (IBAction)SaveClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UIScrollView *mainscroll;
+@property (weak, nonatomic) IBOutlet UILabel *lblPagetitle;
+@property (weak, nonatomic) IBOutlet UIButton *btnSave;
+- (IBAction)ImageClick:(id)sender;
 
 
 @end

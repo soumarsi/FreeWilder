@@ -19,7 +19,7 @@
 @end
 
 @implementation FindInterestsViewController
-
+@synthesize lblPageTitle;
 - (void)viewDidLoad {
     [super viewDidLoad];
     pos=true;
@@ -55,6 +55,8 @@
     sidemenu.hidden=YES;
     sidemenu.SlideDelegate=self;
     [self.view addSubview:sidemenu];
+    
+    lblPageTitle.text=@"Find Your Interests";
     //json
     [self getdata];
 }

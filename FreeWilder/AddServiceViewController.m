@@ -14,7 +14,7 @@
 @end
 
 @implementation AddServiceViewController
-
+@synthesize lblPageTitle,lblPhoto,txtName,txtPrice,btnCategory,btnNext;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -65,6 +65,13 @@
     sidemenu.SlideDelegate=self;
     [self.view addSubview:sidemenu];
     
+    lblPageTitle.text=@"Add a Service";
+    lblPhoto.text=@"Add Photos";
+    txtName.placeholder=@"Name";
+    _description1.text=@"Description";
+    txtPrice.placeholder=@"Price";
+    [btnCategory setTitle:@"Select Category" forState:UIControlStateNormal];
+    [btnNext setTitle:@"Next" forState:UIControlStateNormal];
 }
 -(void)pushmethod:(UIButton *)sender
 {
@@ -284,4 +291,6 @@
     [[self navigationController] popViewControllerAnimated:NO];
 }
 
+- (IBAction)NextClick:(id)sender {
+}
 @end

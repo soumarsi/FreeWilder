@@ -30,5 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIView *footer_base;
 - (IBAction)AddClick:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblServiceName;
+@property (weak, nonatomic) IBOutlet UILabel *lblPageTitle;
+@property (weak, nonatomic) IBOutlet UIButton *btnAdd;
 
 @end

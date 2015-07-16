@@ -18,6 +18,12 @@
 
 - (IBAction)login_button:(id)sender;
 - (IBAction)sign_up:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *lblLogin;
+@property (weak, nonatomic) IBOutlet UILabel *lblFacebook;
+@property (weak, nonatomic) IBOutlet UILabel *lbldontHaveAccount;
+@property (weak, nonatomic) IBOutlet UIButton *btnSignUp;
+@property (weak, nonatomic) IBOutlet UIButton *btnForgetPassword;
+@property (weak, nonatomic) IBOutlet UIButton *btnlogin;
 
 @end
 

@@ -21,5 +21,12 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *description1;
 @property (weak, nonatomic) IBOutlet UIView *footer_base;
+@property (weak, nonatomic) IBOutlet UILabel *lblPageTitle;
+@property (weak, nonatomic) IBOutlet UIButton *btnNext;
+- (IBAction)NextClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnCategory;
+@property (weak, nonatomic) IBOutlet UITextField *txtName;
+@property (weak, nonatomic) IBOutlet UITextField *txtPrice;
+@property (weak, nonatomic) IBOutlet UILabel *lblPhoto;
 
 @end

@@ -34,5 +34,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *Signup_confrmpwd;
 @property(strong ,nonatomic)NSMutableArray *jsonResult;
 - (IBAction)datebtn:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *lblSignUp;
+@property (weak, nonatomic) IBOutlet UILabel *lblGender;
+@property (weak, nonatomic) IBOutlet UILabel *lblDtOfBirth;
+@property (weak, nonatomic) IBOutlet UIButton *btnSignUp;
 
 @end

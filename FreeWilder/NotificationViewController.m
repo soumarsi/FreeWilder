@@ -17,7 +17,7 @@
 @end
 
 @implementation NotificationViewController
-
+@synthesize btnMessage,btnnotification;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -53,6 +53,9 @@
     sidemenu.hidden=YES;
     sidemenu.SlideDelegate=self;
     [self.view addSubview:sidemenu];
+    
+    [btnMessage setTitle:@"Messages" forState:UIControlStateNormal];
+    [btnnotification setTitle:@"Notifications" forState:UIControlStateNormal];
 }
 
 -(void)pushmethod:(UIButton *)sender

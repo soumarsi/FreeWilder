@@ -119,6 +119,9 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -238,7 +241,13 @@
                     <navigationItem key="navigationItem" id="k3t-Tm-FtT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnForgetPassword" destination="OSw-x8-PQI" id="uxq-jU-YSL"/>
+                        <outlet property="btnSignUp" destination="hLF-bR-Fe9" id="1rF-He-kao"/>
+                        <outlet property="btnlogin" destination="NMn-Yd-cj6" id="3fC-sV-XcY"/>
                         <outlet property="email" destination="89a-Hs-Hy4" id="YpB-rc-WHs"/>
+                        <outlet property="lblFacebook" destination="HXj-wY-7UJ" id="b1T-9p-fG0"/>
+                        <outlet property="lblLogin" destination="GVk-6V-W0R" id="WZ2-so-buI"/>
+                        <outlet property="lbldontHaveAccount" destination="QRS-aT-BN8" id="u3V-kZ-jGk"/>
                         <outlet property="password" destination="psY-YX-cpa" id="Gw7-Cg-9bk"/>
                     </connections>
                 </viewController>
@@ -494,8 +503,12 @@
                         <outlet property="Signup_email" destination="gen-p4-jiz" id="Kjs-E0-Mh7"/>
                         <outlet property="Signup_name" destination="lkE-tB-ruW" id="kpA-yd-sZf"/>
                         <outlet property="Signup_password" destination="f24-IY-Z0d" id="9pj-ow-DPu"/>
+                        <outlet property="btnSignUp" destination="fLH-zJ-ObA" id="Sdy-x2-E5e"/>
                         <outlet property="dateShowlbl" destination="pOb-FE-IIw" id="qve-tQ-hNq"/>
                         <outlet property="gender" destination="vZs-cQ-v0r" id="upJ-mt-IXI"/>
+                        <outlet property="lblDtOfBirth" destination="qCu-iT-nAr" id="yab-xx-RpB"/>
+                        <outlet property="lblGender" destination="n4F-qW-1dC" id="eGh-vC-VMv"/>
+                        <outlet property="lblSignUp" destination="jJo-G5-oNX" id="Cof-LR-sHp"/>
                         <outlet property="mainView" destination="6vW-sX-PMs" id="PB7-Z2-hb2"/>
                     </connections>
                 </viewController>
@@ -533,6 +546,9 @@
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="NextClick:" destination="waI-Yk-swV" eventType="touchUpInside" id="OzQ-z9-9HH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6xW-4z-3lo">
                                 <rect key="frame" x="16" y="79" width="304" height="58"/>
@@ -638,8 +654,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnCategory" destination="6xW-4z-3lo" id="4Tv-ki-Gdv"/>
+                        <outlet property="btnNext" destination="woO-FW-lST" id="KKM-bR-DPj"/>
                         <outlet property="description1" destination="bL7-n7-qVU" id="Qn0-tE-CSq"/>
                         <outlet property="footer_base" destination="tGI-Ef-w5S" id="ORo-bN-L2t"/>
+                        <outlet property="lblPageTitle" destination="9AG-f4-K3E" id="jhq-D2-1mI"/>
+                        <outlet property="lblPhoto" destination="EZR-JV-LTr" id="VBH-Y9-zYZ"/>
+                        <outlet property="txtName" destination="M2f-MR-aGa" id="4fO-Pu-QF7"/>
+                        <outlet property="txtPrice" destination="XV5-VH-9kK" id="iBZ-q7-5YV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Xn-U6-gBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -670,7 +692,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6SP-ym-zcJ">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6SP-ym-zcJ">
                                 <rect key="frame" x="237" y="20" width="94" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
@@ -697,22 +719,22 @@
                                         <rect key="frame" x="20" y="-19" width="320" height="151"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demo_image" id="SAu-Gw-YLm">
-                                        <rect key="frame" x="133" y="17" width="94" height="77"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="SAu-Gw-YLm">
+                                        <rect key="frame" x="141" y="15" width="77" height="77"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit_icon" id="Nof-A8-WOw">
                                         <rect key="frame" x="206" y="75" width="21" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jhone Deo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0dU-Hx-wW2">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0dU-Hx-wW2">
                                         <rect key="frame" x="106" y="104" width="148" height="28"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="18"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Jhone Deo" textAlignment="center" minimumFontSize="17" background="input_back" id="NVy-0g-Xs2">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="input_back" id="NVy-0g-Xs2">
                                         <rect key="frame" x="36" y="155" width="288" height="53"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -722,7 +744,7 @@
                                             <outlet property="delegate" destination="10h-uG-HY0" id="sTL-mF-Y61"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Jhone@deo.com" textAlignment="center" minimumFontSize="17" background="input_back" id="Crz-V3-rDd">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="input_back" id="Crz-V3-rDd">
                                         <rect key="frame" x="36" y="210" width="288" height="53"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -732,7 +754,7 @@
                                             <outlet property="delegate" destination="10h-uG-HY0" id="Ysv-05-HVe"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="999 999 9999" textAlignment="center" minimumFontSize="17" background="input_back" id="eZy-qf-zQF">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="input_back" id="eZy-qf-zQF">
                                         <rect key="frame" x="36" y="265" width="288" height="53"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -745,6 +767,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N92-Wy-0A1">
                                         <rect key="frame" x="36" y="349" width="288" height="48"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <state key="normal" image="save_button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -753,11 +776,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T7d-TV-B8c">
-                                        <rect key="frame" x="132" y="17" width="97" height="79"/>
+                                        <rect key="frame" x="132" y="7" width="97" height="97"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="ImageClick:" destination="10h-uG-HY0" eventType="touchUpInside" id="W7j-mB-YTh"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </scrollView>
@@ -766,7 +792,9 @@
                     </view>
                     <connections>
                         <outlet property="ProfileImg" destination="SAu-Gw-YLm" id="Qaa-sP-VTC"/>
+                        <outlet property="btnSave" destination="N92-Wy-0A1" id="J6P-13-L5i"/>
                         <outlet property="footer_base" destination="s8f-ic-1yu" id="X2k-D7-J9y"/>
+                        <outlet property="lblPagetitle" destination="pD9-2e-P8h" id="7Yc-qT-R0v"/>
                         <outlet property="lblUserName" destination="0dU-Hx-wW2" id="d78-QF-a8v"/>
                         <outlet property="mainscroll" destination="Hq6-0W-2ZW" id="7tc-Z6-Ftl"/>
                         <outlet property="txtEmail" destination="Crz-V3-rDd" id="Izt-1J-CGf"/>
@@ -1228,7 +1256,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnAdd" destination="SJM-jP-9Gs" id="rQs-z7-OLv"/>
                         <outlet property="footer_base" destination="cLL-wU-72Z" id="USN-NC-NJL"/>
+                        <outlet property="lblPageTitle" destination="Cgd-bS-LcI" id="DCY-wT-giO"/>
                         <outlet property="lblServiceName" destination="LGy-Vq-c5D" id="nbQ-pH-dqd"/>
                         <outlet property="tblService" destination="KbH-1O-R4X" id="UXQ-6l-Ia8"/>
                     </connections>
@@ -1394,6 +1424,7 @@
                     </view>
                     <connections>
                         <outlet property="footer_base" destination="Yqa-3i-Jgl" id="9XJ-6w-jWN"/>
+                        <outlet property="lblPageTitle" destination="51s-tz-AsA" id="p5P-SV-5Oh"/>
                         <outlet property="lblWishlist" destination="61F-69-LtW" id="ztL-O6-ybo"/>
                         <outlet property="tblWishList" destination="PEh-rQ-xTK" id="q4d-Kp-trG"/>
                     </connections>
@@ -1415,7 +1446,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="230" sectionHeaderHeight="22" sectionFooterHeight="22" id="NLh-CB-62i">
-                                <rect key="frame" x="0.0" y="126" width="320" height="393"/>
+                                <rect key="frame" x="0.0" y="126.000002754984" width="320" height="393"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1560,6 +1591,7 @@
                         <outlet property="ProductListingTable" destination="NLh-CB-62i" id="etm-EN-clj"/>
                         <outlet property="footer_base" destination="0Qa-q5-niS" id="1Gx-Un-7DJ"/>
                         <outlet property="lblCategoryName" destination="gqW-x3-dGg" id="BEP-0Q-PIc"/>
+                        <outlet property="lblPageTitle" destination="tc5-GR-hQG" id="w6n-iJ-wHp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBb-0v-JkU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1658,6 +1690,8 @@
                     <navigationItem key="navigationItem" id="5z4-7P-kUa"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnMessage" destination="COJ-dH-Ssb" id="Kqr-gG-AG0"/>
+                        <outlet property="btnnotification" destination="WS8-f9-zpn" id="Q0x-x8-FGO"/>
                         <outlet property="footer_base" destination="TIF-L7-VM2" id="ZXr-b6-BV7"/>
                     </connections>
                 </viewController>
@@ -1691,14 +1725,14 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" id="bRJ-Vc-cRe">
                                 <rect key="frame" x="67" y="92" width="246" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="Lfz-hF-jfu" id="w7x-WH-oG3"/>
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="rfA-CQ-P13">
-                                <rect key="frame" x="0.0" y="128.00000021168736" width="320" height="388"/>
+                                <rect key="frame" x="0.0" y="128.00000073288277" width="320" height="388"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1788,7 +1822,9 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnSend" destination="sPk-VH-SW2" id="Uah-kF-kZL"/>
                         <outlet property="footer_base" destination="cmo-2X-Wq0" id="B6F-xm-2xp"/>
+                        <outlet property="lblInviteFriend" destination="YGc-ZO-otR" id="DkM-bT-2VA"/>
                         <outlet property="searchtextfield" destination="bRJ-Vc-cRe" id="CWd-bH-2Kx"/>
                     </connections>
                 </viewController>
@@ -1954,7 +1990,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="230" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rst-fX-ssl">
-                                        <rect key="frame" x="0.0" y="79.99999874466765" width="320" height="438"/>
+                                        <rect key="frame" x="0.0" y="79.999999401231918" width="320" height="438"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -2072,25 +2108,8 @@
                                                 <rect key="frame" x="8" y="69" width="18" height="18"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Gkv-hV-gnE">
-                                                <rect key="frame" x="0.0" y="390" width="320" height="46"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <color key="backgroundColor" red="0.13069165267639793" green="0.55560267193998814" blue="0.35134326999980059" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
-                                                <state key="normal" title="SEARCH">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="SearchClick:" destination="ZVw-hW-uw4" eventType="touchUpInside" id="n3G-LI-bl3"/>
-                                                </connections>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchWhite" id="v5z-la-X3G">
-                                                <rect key="frame" x="96" y="402" width="22" height="22"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a Business or Service" minimumFontSize="17" background="topbar" id="WJf-2d-68J">
-                                                <rect key="frame" x="0.0" y="14" width="320" height="41"/>
+                                                <rect key="frame" x="0.0" y="15" width="320" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
@@ -2100,7 +2119,7 @@
                                                 </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search" id="iWG-sG-LxB">
-                                                <rect key="frame" x="5" y="24" width="22" height="22"/>
+                                                <rect key="frame" x="5" y="25" width="22" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="All Days" minimumFontSize="17" background="topbar" id="nSM-S5-gV7">
@@ -2165,6 +2184,23 @@
                                                     <action selector="TimeClick:" destination="ZVw-hW-uw4" eventType="touchUpInside" id="SjK-RC-E2L"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Gkv-hV-gnE">
+                                                <rect key="frame" x="0.0" y="390" width="320" height="46"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <color key="backgroundColor" red="0.13069165267639793" green="0.55560267193998814" blue="0.35134326999980059" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="SearchClick:" destination="ZVw-hW-uw4" eventType="touchUpInside" id="n3G-LI-bl3"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchWhite" id="v5z-la-X3G">
+                                                <rect key="frame" x="96" y="402" width="22" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -2189,6 +2225,7 @@
                         <outlet property="btnSearch" destination="Gkv-hV-gnE" id="ehM-Qr-dmS"/>
                         <outlet property="btnTime" destination="2YZ-iF-p7E" id="gax-F6-tor"/>
                         <outlet property="footer_base" destination="UIW-2Y-YPJ" id="Iyb-mm-YlS"/>
+                        <outlet property="lblPageTitle" destination="OY4-m1-qYn" id="Yiu-qp-Ezg"/>
                         <outlet property="lblProduct" destination="52M-De-xKa" id="kZz-yO-OZc"/>
                         <outlet property="txtDays" destination="nSM-S5-gV7" id="2AN-n6-r7i"/>
                         <outlet property="txtLocation" destination="doB-BB-D3T" id="pc6-Mf-gD4"/>
@@ -2263,6 +2300,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MW4-5g-13I">
                                         <rect key="frame" x="85" y="222" width="149" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                         <state key="normal" image="Get_Started_button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2375,7 +2413,13 @@
                         <outlet property="btn2" destination="SrH-Ec-wWA" id="DfH-HE-cNB"/>
                         <outlet property="btn3" destination="jU9-ir-ZaQ" id="XpH-wG-gY9"/>
                         <outlet property="btn4" destination="7gT-jp-dyW" id="VZz-m6-OID"/>
+                        <outlet property="btnGetStarted" destination="MW4-5g-13I" id="VIf-iO-ers"/>
                         <outlet property="footer_base" destination="bON-j0-q0l" id="fZf-tp-KBU"/>
+                        <outlet property="lbl2nddummyText" destination="WPa-5q-zjp" id="SJJ-LM-g6I"/>
+                        <outlet property="lblDummyText" destination="eRb-2q-bDv" id="27Y-v7-Lcs"/>
+                        <outlet property="lblOr" destination="EP5-Nq-hB6" id="0Gl-WZ-w1L"/>
+                        <outlet property="lblfindinterest" destination="S4O-Wf-FX1" id="syk-PP-5Q0"/>
+                        <outlet property="lblhaveBusiness" destination="T3L-zM-q9n" id="U6J-8T-xXN"/>
                         <outlet property="moreBtn" destination="8Dm-xI-0wF" id="sIl-29-EA2"/>
                         <outlet property="scroll" destination="7Ve-Ci-Xez" id="tIa-yW-fQf"/>
                     </connections>
@@ -2428,6 +2472,7 @@
                     <connections>
                         <outlet property="findscrollview" destination="66K-Ar-dbh" id="39H-YL-NXZ"/>
                         <outlet property="footer_base" destination="MpX-AF-GiF" id="pTy-2F-vDP"/>
+                        <outlet property="lblPageTitle" destination="uSa-ER-pXF" id="xAQ-3H-Cp7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u5B-DW-9cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2453,7 +2498,6 @@
         <image name="backarrow" width="51" height="51"/>
         <image name="big_add_icon" width="99" height="78"/>
         <image name="button_type1" width="279" height="64"/>
-        <image name="demo_image" width="118" height="117"/>
         <image name="downArrow" width="50" height="50"/>
         <image name="ducati3" width="1250" height="935"/>
         <image name="edit_icon" width="24" height="24"/>

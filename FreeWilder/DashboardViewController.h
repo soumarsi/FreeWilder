@@ -28,5 +28,11 @@
 @property (strong, nonatomic) IBOutlet UIView *footer_base;
 - (IBAction)more_interests:(id)sender;
 - (IBAction)get_started_button:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *lblhaveBusiness;
+@property (weak, nonatomic) IBOutlet UILabel *lblDummyText;
+@property (weak, nonatomic) IBOutlet UIButton *btnGetStarted;
+@property (weak, nonatomic) IBOutlet UILabel *lblOr;
+@property (weak, nonatomic) IBOutlet UILabel *lblfindinterest;
+@property (weak, nonatomic) IBOutlet UILabel *lbl2nddummyText;
 
 @end

@@ -13,7 +13,7 @@
 @end
 
 @implementation SignUpViewController
-
+@synthesize lblDtOfBirth,lblGender,lblSignUp,btnSignUp;
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
@@ -27,8 +27,14 @@
     
     _jsonResult = [[NSMutableArray alloc]init];
     
-    
-    
+    _Signup_confrmpwd.placeholder=@"Confirm Password";
+    _Signup_email.placeholder=@"Email";
+    _Signup_name.placeholder=@"Name";
+    _Signup_password.placeholder=@"Password";
+    lblSignUp.text=@"Sign up for Free";
+    lblGender.text=@"Select your Gender";
+    lblDtOfBirth.text=@"Date of Birth";
+    [btnSignUp setTitle:@"SIGN UP" forState:UIControlStateNormal];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -160,13 +166,14 @@
     NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
     dateFormat.dateStyle=NSDateFormatterMediumStyle;
     [dateFormat setDateFormat:@"MMM/dd/yyyy"];
+    
     strday=[NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:picker.date]];
     strmon=[NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:picker.date]];
     stryear=[NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:picker.date]];
     strday = [strday substringWithRange:NSMakeRange(4,2)];
     strmon = [strmon substringWithRange:NSMakeRange(0,3)];
     stryear = [stryear substringWithRange:NSMakeRange(7,4)];
-    
+   
 }
 
 
@@ -329,8 +336,19 @@
                      }
      
      ];
-    [picker addTarget:self action:@selector(LabelTitle:) forControlEvents:UIControlEventValueChanged];
-    NSLog(@".....%@",strday);
+  //  [picker addTarget:self action:@selector(LabelTitle:) forControlEvents:UIControlEventValueChanged];
+ //   NSLog(@".....%@",strday);
+  //  NSLog(@"date=%@",picker.date);
+    NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
+    dateFormat.dateStyle=NSDateFormatterMediumStyle;
+    [dateFormat setDateFormat:@"MMM/dd/yyyy"];
+    
+    strday=[NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:picker.date]];
+    strmon=[NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:picker.date]];
+    stryear=[NSString stringWithFormat:@"%@",[dateFormat  stringFromDate:picker.date]];
+    strday = [strday substringWithRange:NSMakeRange(4,2)];
+    strmon = [strmon substringWithRange:NSMakeRange(0,3)];
+    stryear = [stryear substringWithRange:NSMakeRange(7,4)];
     [self monthcheck];
     dateShowlbl.text=[NSString stringWithFormat:@"%@/%@/%@",stryear,strmon,strday];
     
