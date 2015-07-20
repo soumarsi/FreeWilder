@@ -92,7 +92,7 @@
         [ArrServiceList removeAllObjects];
         // data present in core data so show data from core data
         NSLog(@"data from local db");
-        NSInteger datacount;
+      //  NSInteger datacount;
         for (NSManagedObject *obj1 in fetchrequest)
         {
             

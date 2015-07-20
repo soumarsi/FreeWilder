@@ -17,6 +17,7 @@
     Side_menu *sidemenu;
     UIView *overlay;
 
+
 }
 
 @property (strong, nonatomic) IBOutlet UIView *footer_base;

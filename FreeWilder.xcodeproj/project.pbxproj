@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		156DFDDE1B43BECA00D3F784 /* ForgotpasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 156DFDDD1B43BECA00D3F784 /* ForgotpasswordViewController.m */; };
+		2C76EDB01B5B9EF900512901 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C76EDAF1B5B9EF900512901 /* AddressBookUI.framework */; };
+		2C76EDB21B5B9EFE00512901 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C76EDB11B5B9EFE00512901 /* AddressBook.framework */; };
+		2C76EDB41B5B9F0500512901 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C76EDB31B5B9F0500512901 /* CoreGraphics.framework */; };
+		2C76EDB61B5B9F0B00512901 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C76EDB51B5B9F0B00512901 /* Foundation.framework */; };
+		2C76EDB81B5B9F1300512901 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C76EDB71B5B9F1300512901 /* UIKit.framework */; };
 		5B76EF5E1B5131D2000380E1 /* ServiceListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B76EF5D1B5131D2000380E1 /* ServiceListingViewController.m */; };
 		5B76EF611B513344000380E1 /* ServiceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B76EF601B513344000380E1 /* ServiceListCell.m */; };
 		5B7E66331B54CE3100D760EC /* SearchProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E66321B54CE3100D760EC /* SearchProductViewController.m */; };
@@ -76,6 +81,11 @@
 /* Begin PBXFileReference section */
 		156DFDDC1B43BECA00D3F784 /* ForgotpasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotpasswordViewController.h; sourceTree = "<group>"; };
 		156DFDDD1B43BECA00D3F784 /* ForgotpasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotpasswordViewController.m; sourceTree = "<group>"; };
+		2C76EDAF1B5B9EF900512901 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		2C76EDB11B5B9EFE00512901 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		2C76EDB31B5B9F0500512901 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2C76EDB51B5B9F0B00512901 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2C76EDB71B5B9F1300512901 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5B76EF5C1B5131D2000380E1 /* ServiceListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListingViewController.h; sourceTree = "<group>"; };
 		5B76EF5D1B5131D2000380E1 /* ServiceListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListingViewController.m; sourceTree = "<group>"; };
 		5B76EF5F1B513344000380E1 /* ServiceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListCell.h; sourceTree = "<group>"; };
@@ -185,6 +195,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C76EDB81B5B9F1300512901 /* UIKit.framework in Frameworks */,
+				2C76EDB61B5B9F0B00512901 /* Foundation.framework in Frameworks */,
+				2C76EDB41B5B9F0500512901 /* CoreGraphics.framework in Frameworks */,
+				2C76EDB21B5B9EFE00512901 /* AddressBook.framework in Frameworks */,
+				2C76EDB01B5B9EF900512901 /* AddressBookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +287,11 @@
 		F98741741B157B7200CDAD0F = {
 			isa = PBXGroup;
 			children = (
+				2C76EDB71B5B9F1300512901 /* UIKit.framework */,
+				2C76EDB51B5B9F0B00512901 /* Foundation.framework */,
+				2C76EDB31B5B9F0500512901 /* CoreGraphics.framework */,
+				2C76EDB11B5B9EFE00512901 /* AddressBook.framework */,
+				2C76EDAF1B5B9EF900512901 /* AddressBookUI.framework */,
 				8F7C756D1B42934F0082FA5F /* Json Data Model */,
 				F987417F1B157B7200CDAD0F /* FreeWilder */,
 				F987419C1B157B7200CDAD0F /* FreeWilderTests */,
@@ -461,7 +481,6 @@
 				TargetAttributes = {
 					F987417C1B157B7200CDAD0F = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = WXGENKJWK5;
 					};
 					F98741981B157B7200CDAD0F = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -622,8 +641,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -645,7 +664,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "371e66b1-d94e-4602-8136-d72a9b2b3fb3";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -667,8 +686,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -683,7 +702,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "371e66b1-d94e-4602-8136-d72a9b2b3fb3";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -693,13 +712,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FreeWilder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "371e66b1-d94e-4602-8136-d72a9b2b3fb3";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -707,13 +726,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FreeWilder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "371e66b1-d94e-4602-8136-d72a9b2b3fb3";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

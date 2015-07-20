@@ -84,7 +84,7 @@
         [ArrProductList removeAllObjects];
         // data present in core data so show data from core data
         NSLog(@"data from local db");
-        NSInteger datacount;
+       // NSInteger datacount;
         for (NSManagedObject *obj1 in fetchrequest)
         {
             
@@ -96,6 +96,9 @@
                 lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
             }
         }
+        
+        NSLog(@"arra-- %@", ArrProductList);
+        
      //   NSLog(@"arr count=%lu",(unsigned long)[ArrProductList count]);
         [ProductListingTable reloadData];
         
@@ -237,7 +240,7 @@
                 
             {
                 
-              //  NSLog(@"result=%@",[result valueForKey:@"details"]);
+             NSLog(@"result=%@",[result valueForKey:@"details"]);
                 
                 for ( NSDictionary *tempDict1 in  [result objectForKey:@"details"])
                 {

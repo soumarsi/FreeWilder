@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Qm9-L9-a1U">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Qm9-L9-a1U">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -35,7 +35,6 @@
             <string>Lato-Light</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
-            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -1446,7 +1445,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="230" sectionHeaderHeight="22" sectionFooterHeight="22" id="NLh-CB-62i">
-                                <rect key="frame" x="0.0" y="126.000002754984" width="320" height="393"/>
+                                <rect key="frame" x="0.0" y="126.0000013153972" width="320" height="393"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1732,7 +1731,7 @@
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="rfA-CQ-P13">
-                                <rect key="frame" x="0.0" y="128.00000073288277" width="320" height="388"/>
+                                <rect key="frame" x="0.0" y="128.00000102229058" width="320" height="388"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1747,24 +1746,20 @@
                                                     <rect key="frame" x="18" y="19" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Johne Deo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N6o-8p-2mE">
-                                                    <rect key="frame" x="78" y="19" width="94" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N6o-8p-2mE">
+                                                    <rect key="frame" x="78" y="19" width="206" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                     <color key="textColor" red="0.34901960780000002" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mou-3D-n0z">
-                                                    <rect key="frame" x="78" y="48" width="121" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mou-3D-n0z">
+                                                    <rect key="frame" x="78" y="48" width="234" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="19"/>
                                                     <color key="textColor" red="0.34901960780000002" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="kLB-TG-jiQ">
-                                                    <rect key="frame" x="281" y="41" width="23" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <view alpha="0.60000002384185791" contentMode="scaleToFill" id="xHV-6N-9ui">
                                                     <rect key="frame" x="82" y="93" width="90" height="2"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -1773,7 +1768,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="tickimg" destination="kLB-TG-jiQ" id="8J4-gh-38a"/>
+                                            <outlet property="invitefriendImage" destination="1sC-zX-0fX" id="8dV-sH-SdC"/>
+                                            <outlet property="invitefriendName" destination="N6o-8p-2mE" id="pos-96-WNc"/>
+                                            <outlet property="invitefriendPhonenumber" destination="Mou-3D-n0z" id="uxi-4d-Wvk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1803,15 +1800,6 @@
                                     <action selector="Back_button_action:" destination="Lfz-hF-jfu" eventType="touchUpInside" id="00m-Vm-3HS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sPk-VH-SW2">
-                                <rect key="frame" x="238" y="21" width="94" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="19"/>
-                                <state key="normal" title="Send">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <view contentMode="scaleToFill" id="cmo-2X-Wq0">
                                 <rect key="frame" x="0.0" y="520" width="320" height="48"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
@@ -1822,8 +1810,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="btnSend" destination="sPk-VH-SW2" id="Uah-kF-kZL"/>
                         <outlet property="footer_base" destination="cmo-2X-Wq0" id="B6F-xm-2xp"/>
+                        <outlet property="inviteTable" destination="rfA-CQ-P13" id="JBb-sl-flj"/>
                         <outlet property="lblInviteFriend" destination="YGc-ZO-otR" id="DkM-bT-2VA"/>
                         <outlet property="searchtextfield" destination="bRJ-Vc-cRe" id="CWd-bH-2Kx"/>
                     </connections>
@@ -1990,7 +1978,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="230" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rst-fX-ssl">
-                                        <rect key="frame" x="0.0" y="79.999999401231918" width="320" height="438"/>
+                                        <rect key="frame" x="0.0" y="79.999998024728498" width="320" height="438"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>

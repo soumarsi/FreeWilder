@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14C1514" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CategoryList" syncable="YES">
         <attribute name="categoryId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ContactList" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="ProductList" syncable="YES">
         <attribute name="categoryId" optional="YES" attributeType="String" syncable="YES"/>
@@ -41,5 +46,6 @@
         <element name="ProductList" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="ServiceList" positionX="-63" positionY="72" width="128" height="150"/>
         <element name="WishList" positionX="-54" positionY="90" width="128" height="150"/>
+        <element name="ContactList" positionX="-54" positionY="90" width="128" height="90"/>
     </elements>
 </model>

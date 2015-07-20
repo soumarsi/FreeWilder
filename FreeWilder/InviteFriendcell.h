@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface InviteFriendcell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UIImageView *tickimg;
+@property (strong, nonatomic) IBOutlet UIButton *tickimg;
+@property (weak, nonatomic) IBOutlet UILabel *invitefriendName;
+@property (weak, nonatomic) IBOutlet UILabel *invitefriendPhonenumber;
+@property (weak, nonatomic) IBOutlet UIImageView *invitefriendImage;
 
 @end

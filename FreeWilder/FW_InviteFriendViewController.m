@@ -10,15 +10,21 @@
 #import "InviteFriendcell.h"
 #import "Footer.h"
 #import "Side_menu.h"
+#import "AppDelegate.h"
+#import <MessageUI/MessageUI.h>
 
-@interface FW_InviteFriendViewController ()<footerdelegate,Slide_menu_delegate>
+@interface FW_InviteFriendViewController ()<footerdelegate,Slide_menu_delegate,MFMailComposeViewControllerDelegate>
 {
     InviteFriendcell *cell;
     NSMutableArray *arrindexpath;
     int i;
     BOOL flag;
     int selected;
+    NSMutableArray *contactList;
+    AppDelegate *appDelegate;
+
 }
+@property (weak, nonatomic) IBOutlet UITableView *inviteTable;
 
 @end
 
@@ -26,6 +32,26 @@
 @synthesize lblInviteFriend,btnSend;
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+    
+    contactList = [[NSMutableArray alloc]init];
+    
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    NSManagedObjectContext *context1=[appDelegate managedObjectContext];
+    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"ContactList"];
+   NSMutableArray *fetcharray=[[context1 executeFetchRequest:request error:nil] mutableCopy];
+    NSInteger CoreDataCount=[fetcharray count];
+    NSLog(@"core data count=%ld",(long)CoreDataCount);
+    
+    [contactList removeAllObjects];
+
+    for(NSManagedObject *obj1 in fetcharray)
+    {
+        [contactList addObject:obj1];
+    }
+
+
     i=0;
     flag=YES;
     selected=0;
@@ -68,6 +94,7 @@
 
     lblInviteFriend.text=@"Invite Friend";
     [btnSend setTitle:@"Send" forState:UIControlStateNormal];
+    [btnSend setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     _searchtextfield.placeholder=@"Search";
 }
 
@@ -233,54 +260,67 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 15;
+    return contactList.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-          cell=(InviteFriendcell *)[tableView dequeueReusableCellWithIdentifier:@"invitefriendcell"];
-    if(cell)
-    {
-      cell.tickimg.image=NULL;
-        //[arrindexpath removeAllObjects];
-    }
-    if(selected==1)
-    {
-        for(NSUInteger j=0;j<arrindexpath.count;j++)
-        {
-            NSLog(@"arrindexPath count....%lu",(unsigned long)[arrindexpath count]);
-            //NSLog(@"cell okkkkk");
-           InviteFriendcell *cell2=(InviteFriendcell *)[tableView dequeueReusableCellWithIdentifier:@"invitefriendcell" forIndexPath:[arrindexpath objectAtIndex:j]];
-            cell2.tickimg.image=[UIImage imageNamed:@"tick"];
-        }
-        flag=YES;
-   }
-    return cell;
+    cell=(InviteFriendcell *)[tableView dequeueReusableCellWithIdentifier:@"invitefriendcell"];
+    //[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+
+    
+    cell.invitefriendName.text = [[contactList objectAtIndex:indexPath.row] valueForKey:@"name"];
+    cell.invitefriendPhonenumber.text = [[contactList objectAtIndex:indexPath.row] valueForKey:@"email"];
+
+    NSData *data = [[contactList objectAtIndex:indexPath.row] valueForKey:@"Image"];
+    
+        cell.invitefriendImage.image  =[UIImage imageWithData:data];
+    cell.invitefriendImage.layer.cornerRadius = 50/2;
+    cell.invitefriendImage.clipsToBounds = YES;
+    
+       return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    InviteFriendcell *cell1=(InviteFriendcell *)[tableView cellForRowAtIndexPath:indexPath];
     
-    if (flag==NO) {
-        cell1.tickimg.image=NULL;
-        flag=YES;
-        NSLog(@"yes");
-        selected=0;
-        //[arrindexpath removeObjectAtIndex:indexPath.row];
-        //cell1.tag=indexPath.row;
-    }
-    else
+    NSString *emailTitle = @"Invitation to join Freewilder";
+    // Email Content
+    NSString *messageBody = [NSString stringWithFormat:@"Hello,\n You have been invited to join Freewilder by your friend %@.Please click on the link below to visit the website.\n http://esolz.co.in/lab6/freewilder/> \n       Thanks & Regards Freewilder Team.",[[contactList objectAtIndex:indexPath.row] valueForKey:@"name"]];
+    // To address
+    NSArray *toRecipents = [NSArray arrayWithObject:[[contactList objectAtIndex:indexPath.row] valueForKey:@"email"]];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
     {
-        cell1.tickimg.image=[UIImage imageNamed:@"tick"] ;
-        flag=NO;
-         NSLog(@"no");
-        NSLog(@"indexpath.....%@",indexPath);
-        //[arrindexpath addObject:indexPath];
-        [arrindexpath insertObject:indexPath atIndex:i++];
-       // cell1.tag=indexPath.row;
-       // NSLog(@"arrindexPath count....%lu",(unsigned long)[arrindexpath count]);
-        selected=1;
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
     }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
