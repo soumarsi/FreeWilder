@@ -211,15 +211,26 @@
         
         CFStringRef firstName, lastName;
         firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-        
+          lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
         if (ABRecordCopyValue(ref, kABPersonLastNameProperty) != NULL)
         {
-            lastName  = ABRecordCopyValue(ref, kABPersonLastNameProperty);
-            [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
+            if(ABRecordCopyValue(ref, kABPersonFirstNameProperty) != NULL)
+            {
+                    [dOfPerson setObject:[NSString stringWithFormat:@"%@ %@", firstName, lastName] forKey:@"name"];
+            }
+            else
+            {
+                [dOfPerson setObject:[NSString stringWithFormat:@"%@", lastName] forKey:@"name"];
+            }
+          
+        
         }
         else
         {
+             if(ABRecordCopyValue(ref, kABPersonFirstNameProperty) != NULL)
+             {
             [dOfPerson setObject:[NSString stringWithFormat:@"%@", firstName] forKey:@"name"];
+             }
         }
         
         
