@@ -84,7 +84,11 @@
         [ArrProductList removeAllObjects];
         // data present in core data so show data from core data
         NSLog(@"data from local db");
+//<<<<<<< Updated upstream
        // NSInteger datacount;
+//=======
+     //   NSInteger datacount;
+//>>>>>>> Stashed changes
         for (NSManagedObject *obj1 in fetchrequest)
         {
             

@@ -31,7 +31,7 @@
     
     UIButton *temp2;
     
-    int resultCount;
+    NSInteger resultCount;
     
     BOOL smallBtn;
     
@@ -250,10 +250,10 @@
         
     }];
     
-    
+    /*
     
         //////////////////////////
-   /*
+   
         NSManagedObjectContext *context1=[appDelegate managedObjectContext];
         NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"CategoryList"];
         NSMutableArray *fetchrequest=[[context1 executeFetchRequest:request error:nil] mutableCopy];
@@ -641,7 +641,7 @@
         
         
         
-        */
+    */
         
         /////////////////
         
@@ -661,13 +661,13 @@
 
 -(void)btnCreate
 {
-    NSLog(@"result count=%d",resultCount);
+    NSLog(@"result count=%ld",(long)resultCount);
     leftframe=btn3.frame;
     rightframe=btn4.frame;
+   
+    NSInteger rows=resultCount/2;
     
-    int rows=resultCount/2;
-    
-    int oddRow = 0;
+    NSInteger oddRow = 0;
     
     if(resultCount%2)
     {
@@ -677,7 +677,7 @@
         
     }
     
-    NSLog(@"Rows count: %d",rows);
+    NSLog(@"Rows count: %ld",(long)rows);
     
     
     for (int i=0; i<rows; i++)
@@ -735,7 +735,7 @@
         }
         else
         {
-            [temp1 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount) ]valueForKey:@"category_name"] forState:UIControlStateNormal];
+            [temp1 setTitle:[[[jsonResult valueForKey:@"infoaray"] objectAtIndex:(titleCount)]valueForKey:@"category_name"] forState:UIControlStateNormal];
         }
         
         
@@ -758,7 +758,7 @@
         {
             NSLog(@"odd row....");
             
-            
+             NSLog(@"title count=%d",titleCount);
             
             CGRect rightTempFrame=leftframe;
             

@@ -20,7 +20,7 @@
     int i;
     BOOL flag;
     int selected;
-    NSMutableArray *contactList;
+    NSMutableArray *contactList,*ArrSearchList;
     AppDelegate *appDelegate;
 
 }
@@ -29,12 +29,13 @@
 @end
 
 @implementation FW_InviteFriendViewController
-@synthesize lblInviteFriend,btnSend;
+@synthesize lblInviteFriend,btnSend,SearchBar,inviteTable,lblNoDataFound;
 - (void)viewDidLoad {
     [super viewDidLoad];
    
     
     contactList = [[NSMutableArray alloc]init];
+    ArrSearchList = [[NSMutableArray alloc]init];
     
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
@@ -51,7 +52,12 @@
         [contactList addObject:obj1];
     }
 
-
+    [SearchBar setBackgroundColor:[UIColor clearColor]];
+    //   searchbar.barTintColor = [UIColor colorWithRed:(35/255.0f) green:(154/255.0f) blue:(242/255.0f) alpha:1];
+    UITextField *searchField = [SearchBar valueForKey:@"_searchField"];
+    searchField.textColor = [UIColor blackColor];
+    [[UIBarButtonItem appearanceWhenContainedIn: [UISearchBar class], nil] setTintColor:[UIColor whiteColor]];
+    lblNoDataFound.hidden=YES;
     i=0;
     flag=YES;
     selected=0;
@@ -260,7 +266,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (IsSearch==1)
+    {
+        return ArrSearchList.count;
+    }
+    else
+    {
     return contactList.count;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -268,13 +281,24 @@
     //[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
 
-    
+    if (IsSearch==1)
+    {
+        cell.invitefriendName.text = [[ArrSearchList objectAtIndex:indexPath.row] valueForKey:@"name"];
+        cell.invitefriendPhonenumber.text = [[ArrSearchList objectAtIndex:indexPath.row] valueForKey:@"email"];
+        
+        NSData *data = [[ArrSearchList objectAtIndex:indexPath.row] valueForKey:@"Image"];
+        
+        cell.invitefriendImage.image  =[UIImage imageWithData:data];
+    }
+    else
+    {
     cell.invitefriendName.text = [[contactList objectAtIndex:indexPath.row] valueForKey:@"name"];
     cell.invitefriendPhonenumber.text = [[contactList objectAtIndex:indexPath.row] valueForKey:@"email"];
 
     NSData *data = [[contactList objectAtIndex:indexPath.row] valueForKey:@"Image"];
-    
+   
         cell.invitefriendImage.image  =[UIImage imageWithData:data];
+    }
     cell.invitefriendImage.layer.cornerRadius = 50/2;
     cell.invitefriendImage.clipsToBounds = YES;
     
@@ -283,7 +307,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (IsSearch==1)
+    {
+        NSString *emailTitle = @"Invitation to join Freewilder";
+        // Email Content
+        NSString *messageBody = [NSString stringWithFormat:@"Hello,\n You have been invited to join Freewilder by your friend %@.Please click on the link below to visit the website.\n http://esolz.co.in/lab6/freewilder/> \n       Thanks & Regards Freewilder Team.",[[contactList objectAtIndex:indexPath.row] valueForKey:@"name"]];
+        // To address
+        NSArray *toRecipents = [NSArray arrayWithObject:[[ArrSearchList objectAtIndex:indexPath.row] valueForKey:@"email"]];
+        
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        mc.mailComposeDelegate = self;
+        [mc setSubject:emailTitle];
+        [mc setMessageBody:messageBody isHTML:NO];
+        [mc setToRecipients:toRecipents];
+        
+        // Present mail view controller on screen
+        [self presentViewController:mc animated:YES completion:NULL];
+    }
+    else{
     NSString *emailTitle = @"Invitation to join Freewilder";
     // Email Content
     NSString *messageBody = [NSString stringWithFormat:@"Hello,\n You have been invited to join Freewilder by your friend %@.Please click on the link below to visit the website.\n http://esolz.co.in/lab6/freewilder/> \n       Thanks & Regards Freewilder Team.",[[contactList objectAtIndex:indexPath.row] valueForKey:@"name"]];
@@ -298,6 +339,7 @@
     
     // Present mail view controller on screen
     [self presentViewController:mc animated:YES completion:NULL];
+    }
 }
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
@@ -361,5 +403,77 @@
 - (IBAction)Back_button_action:(id)sender
 {
     [self POPViewController];
+}
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+    
+    inviteTable.hidden=YES;
+    IsSearch=1;
+    return YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO];
+    searchBar.text=@"";
+    lblNoDataFound.hidden=YES;
+    IsSearch=0;
+    [inviteTable reloadData];
+    inviteTable.hidden=NO;
+    [searchBar resignFirstResponder];
+    //   searchbar.hidden=YES;
+    //   btnsearch.hidden=NO;
+    //   btnsearchicon.hidden=NO;
+    //   btnsearch.selected=NO;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    
+    [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO];
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    
+    
+    
+    if(searchBar.text.length > 0) {
+        NSLog(@"searchbar is");
+        
+        IsSearch=1;
+        [searchBar setShowsCancelButton:YES];
+        [ArrSearchList removeAllObjects];
+        // Filter the array using NSPredicate
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[c] %@",searchText];
+        ArrSearchList = [NSMutableArray arrayWithArray:[contactList filteredArrayUsingPredicate:predicate]];
+        if (ArrSearchList.count==0)
+        {
+            lblNoDataFound.hidden=NO;
+        }
+        else
+        {
+            lblNoDataFound.hidden=YES;
+        }
+        [inviteTable reloadData];
+        inviteTable.hidden=NO;
+     
+        
+    }
+    else {
+        NSLog(@"searchbar is NOT");
+        
+        
+    }
+    
+    
+    
+    
 }
 @end
