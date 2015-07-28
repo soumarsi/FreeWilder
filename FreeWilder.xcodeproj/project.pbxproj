@@ -42,6 +42,7 @@
 		84B35B471B20292B00F5B6FE /* SearchCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B35B401B20292B00F5B6FE /* SearchCategoryCell.m */; };
 		84B35B481B20292B00F5B6FE /* SearchCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B35B421B20292B00F5B6FE /* SearchCategoryViewController.m */; };
 		8F7C75721B4293760082FA5F /* FW_JsonClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7C75701B4293760082FA5F /* FW_JsonClass.m */; };
+		8F8305A41B6760B9003B106D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8305A31B6760B9003B106D /* FacebookSDK.framework */; };
 		A5561B151B1C713700182D42 /* Productcell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5561B131B1C713700182D42 /* Productcell.m */; };
 		A5561B181B1C714E00182D42 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5561B161B1C714E00182D42 /* ProductViewController.m */; };
 		A5561B1B1B1C893800182D42 /* ProductDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5561B1A1B1C893800182D42 /* ProductDetailsViewController.m */; };
@@ -148,6 +149,7 @@
 		8F7C756F1B4293760082FA5F /* FW_JsonClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FW_JsonClass.h; sourceTree = "<group>"; };
 		8F7C75701B4293760082FA5F /* FW_JsonClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FW_JsonClass.m; sourceTree = "<group>"; };
 		8F7C75711B4293760082FA5F /* RS_PCH.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RS_PCH.pch; sourceTree = "<group>"; };
+		8F8305A31B6760B9003B106D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		A5561B131B1C713700182D42 /* Productcell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Productcell.m; sourceTree = "<group>"; };
 		A5561B141B1C713700182D42 /* Productcell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Productcell.h; sourceTree = "<group>"; };
 		A5561B161B1C714E00182D42 /* ProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductViewController.m; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				2C76EDB41B5B9F0500512901 /* CoreGraphics.framework in Frameworks */,
 				2C76EDB21B5B9EFE00512901 /* AddressBook.framework in Frameworks */,
 				2C76EDB01B5B9EF900512901 /* AddressBookUI.framework in Frameworks */,
+				8F8305A41B6760B9003B106D /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +270,14 @@
 			name = "Json Data Model";
 			sourceTree = "<group>";
 		};
+		8F8305A21B676093003B106D /* Facebook SDK */ = {
+			isa = PBXGroup;
+			children = (
+				8F8305A31B6760B9003B106D /* FacebookSDK.framework */,
+			);
+			name = "Facebook SDK";
+			sourceTree = "<group>";
+		};
 		A5561B121B1C711400182D42 /* Tableview Cell Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +298,7 @@
 		F98741741B157B7200CDAD0F = {
 			isa = PBXGroup;
 			children = (
+				8F8305A21B676093003B106D /* Facebook SDK */,
 				2C76EDB71B5B9F1300512901 /* UIKit.framework */,
 				2C76EDB51B5B9F0B00512901 /* Foundation.framework */,
 				2C76EDB31B5B9F0500512901 /* CoreGraphics.framework */,
@@ -714,6 +726,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FreeWilder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -728,6 +744,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FreeWilder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

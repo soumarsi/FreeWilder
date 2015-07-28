@@ -9,6 +9,7 @@
 #import "EditProfileViewController.h"
 #import "Footer.h"
 #import "Side_menu.h"
+#import <FacebookSDK/FacebookSDK.h>
 @interface EditProfileViewController ()<footerdelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate>
 
 @end
@@ -226,6 +227,16 @@
          {
              NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
              [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+             
+             
+             [[FBSession activeSession] closeAndClearTokenInformation];
+             
+             NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+             
+             [userData removeObjectForKey:@"status"];
+
+             [userData removeObjectForKey:@"logInCheck"];
+             
              EditProfileViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];

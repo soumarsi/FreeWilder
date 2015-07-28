@@ -539,6 +539,16 @@
              NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
              [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 
+             
+             
+             [[FBSession activeSession] closeAndClearTokenInformation];
+             
+             NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+             
+             [userData removeObjectForKey:@"status"];
+
+             [userData removeObjectForKey:@"logInCheck"];
+             
              ServiceListingViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];

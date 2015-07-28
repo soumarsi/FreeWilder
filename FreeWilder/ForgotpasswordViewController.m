@@ -97,8 +97,11 @@
     if(![emailTest evaluateWithObject:forgot_Password.text])
     {
         ////NSLog(@"Invalid email address found");
-        UIAlertView *objAlert = [[UIAlertView alloc] initWithTitle:@"Mail alert" message:@"Please enter valid Emailid." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close",nil];
-        [objAlert show];
+//        UIAlertView *objAlert = [[UIAlertView alloc] initWithTitle:@"Mail alert" message:@"Please enter valid Emailid." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close",nil];
+//        [objAlert show];
+        
+        
+        forgot_Password.placeholder=@"Enter valid email id";
         
         return FALSE;
     }

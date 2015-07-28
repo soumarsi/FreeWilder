@@ -10,6 +10,7 @@
 #import "Notificationcell.h"
 #import "Footer.h"
 #import "Side_menu.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 
 @interface NotificationViewController ()<footerdelegate,Slide_menu_delegate>
@@ -174,6 +175,16 @@
          {
              NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
              [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+             
+             
+             
+             [[FBSession activeSession] closeAndClearTokenInformation];
+             
+             NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+             
+             [userData removeObjectForKey:@"status"];
+
+             [userData removeObjectForKey:@"logInCheck"];
 
              NotificationViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              

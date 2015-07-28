@@ -9,6 +9,8 @@
 #import "AddServiceViewController.h"
 #import "Footer.h"
 #import "Side_menu.h"
+#import <FacebookSDK/FacebookSDK.h>
+
 @interface AddServiceViewController ()<footerdelegate,Slide_menu_delegate>
 
 @end
@@ -192,6 +194,16 @@
          {
              NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
              [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+             
+             
+             [[FBSession activeSession] closeAndClearTokenInformation];
+             
+             NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+             
+             [userData removeObjectForKey:@"status"];
+
+             [userData removeObjectForKey:@"logInCheck"];
+             
              AddServiceViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];

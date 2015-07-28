@@ -22,6 +22,9 @@
 @synthesize lblPageTitle;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    dataarray=[[NSMutableArray alloc]init];
+    
     pos=true;
     /// initializing app footer view
     Footer *footer=[[Footer alloc]init];
@@ -66,6 +69,9 @@
     FW_JsonClass *jsonObj=[[FW_JsonClass alloc]init];
     NSString *finddata=[NSString stringWithFormat:@"%@verify_app_category?categorytype=featured",App_Domain_Url];
     [jsonObj GlobalDict:finddata Globalstr:@"array" Withblock:^(id result, NSError *error) {
+        
+        NSLog(@"----? %@",result);
+        
         dataarray=[[NSMutableArray alloc]init];
         dataarray= [result mutableCopy];
         maindic=[[NSMutableDictionary alloc]init];
@@ -82,7 +88,7 @@
     if(screenBounds.size.height == 667 && screenBounds.size.width == 375)
     {
         int  w=120;
-        if ((maindic.count/2)==0)
+        if ((maindic.count%2)==0)
         {
             NSInteger position=0;
             int y=20;
@@ -177,6 +183,8 @@
                     x=x+w+8;
                     [_findscrollview addSubview:button];
                     position++;
+                    
+                     NSLog(@"Position---->%lu",position);
                 }
                 y=y+55;
                 if (pos==true) {
@@ -189,6 +197,17 @@
                 
             }
             UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            
+            NSLog(@"Dataarray count---->%lu",dataarray.count);
+            
+            NSLog(@"Position======>%lu",position);
+            
+ //closed
+            
+            
+
+            NSLog(@"------>%@",[[[dataarray valueForKey:@"infoaray"] objectAtIndex:position]valueForKey:@"id"]);
+            
              button.tag=[[[[dataarray valueForKey:@"infoaray"] objectAtIndex:position]valueForKey:@"id"] integerValue];
             [button addTarget:self
                        action:@selector(tap:)
@@ -203,6 +222,10 @@
             [[button layer] setBorderColor:[UIColor colorWithRed:(171.0f/255.0) green:(171.0f/255.0) blue:(171.0f/255.0) alpha:1].CGColor];
             x=x+160+10;
             [_findscrollview addSubview:button];
+            
+            
+           
+            
             NSInteger p=[maindic count];
             [_findscrollview setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, p*30)];
         }
@@ -212,7 +235,7 @@
     else if(screenBounds.size.height == 568 && screenBounds.size.width == 320)
     {
         int  w=120;
-        if ((maindic.count/2)==0)
+        if ((maindic.count%2)==0)
         {
             NSInteger position=0;
             int y=20;
@@ -342,7 +365,7 @@
     else if(screenBounds.size.height == 736 && screenBounds.size.width == 414)
     {
         int  w=120;
-        if ((maindic.count/2)==0)
+        if ((maindic.count%2)==0)
         {
             NSInteger position=0;
             int y=20;
@@ -472,7 +495,7 @@
     {
         
         int  w=120;
-        if ((maindic.count/2)==0)
+        if ((maindic.count%2)==0)
         {
             NSInteger position=0;
             int y=20;
@@ -615,6 +638,8 @@
     UIButton *tapbutton=(UIButton *)(id)sender;
     tapbutton.selected=YES;
     
+    NSLog(@"Tapped button tag....%ld",tapbutton.tag);
+    
     /*
     if (tapbutton.tag==1) {
         tapbutton.tag=0;
@@ -651,6 +676,9 @@
 
 -(void)pushmethod:(UIButton *)sender
 {
+    
+    NSLog(@"Button tag....> %ld",sender.tag);
+    
     if (sender.tag==5)
     {
         
@@ -767,6 +795,16 @@
              NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
              [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 
+             
+             
+             [[FBSession activeSession] closeAndClearTokenInformation];
+             
+             NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+             
+             [userData removeObjectForKey:@"status"];
+
+             [userData removeObjectForKey:@"logInCheck"];
+             
              FindInterestsViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Login_Page"];
              
              [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];

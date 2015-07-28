@@ -10,6 +10,14 @@
 
 @interface SignUpViewController ()
 
+{
+
+    UITextField *currentField;
+
+}
+
+@property(nonatomic,strong)UISegmentedControl *segControl;
+
 @end
 
 @implementation SignUpViewController
@@ -21,6 +29,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
     // Do any additional setup after loading the view.
     
     obj = [[FW_JsonClass alloc]init];
@@ -40,7 +51,99 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [textField becomeFirstResponder];
+    
+    currentField=textField;
+    
+    textField.inputAccessoryView = [self keyboardToolBar];
+    
+    if([textField isEqual:_Signup_name])
+    {
+        
+        [self.segControl setEnabled:NO forSegmentAtIndex:0];
+        
+        
+    }
+    
+    else     if([textField isEqual:_Signup_confrmpwd])
+    {
+        
+        [self.segControl setEnabled:NO forSegmentAtIndex:1];
+        
+        
+    }
+
+    
+    
+    
 }
+
+
+- (UIToolbar *)keyboardToolBar {
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+    [toolbar sizeToFit];
+    
+    self.segControl = [[UISegmentedControl alloc] initWithItems:@[@"Previous", @"Next"]];
+    
+    [self.segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    
+    self.segControl.momentary = YES;
+    
+    [self.segControl addTarget:self action:@selector(changeRow:) forControlEvents:(UIControlEventValueChanged)];
+    
+    //    [self.segControl setEnabled:NO forSegmentAtIndex:0];
+    
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithCustomView:self.segControl];
+    
+    NSArray *itemsArray = @[nextButton];
+    
+    [toolbar setItems:itemsArray];
+    
+    return toolbar;
+}
+
+
+
+- (void)changeRow:(id)sender {
+    
+    int idx = (int)[sender selectedSegmentIndex];
+    
+    if (idx==1) {
+        
+        if([currentField isEqual:_Signup_name])
+            [_Signup_email becomeFirstResponder];
+        
+        else  if([currentField isEqual:_Signup_email])
+            [_Signup_password becomeFirstResponder];
+        
+        else  if([currentField isEqual:_Signup_password])
+            [_Signup_confrmpwd becomeFirstResponder];
+
+        
+        
+    }
+    else if(idx==0){
+      
+        
+        if([currentField isEqual:_Signup_confrmpwd])
+            [_Signup_password becomeFirstResponder];
+        
+        else  if([currentField isEqual:_Signup_password])
+            [_Signup_email becomeFirstResponder];
+        
+        else  if([currentField isEqual:_Signup_email])
+            [_Signup_name becomeFirstResponder];
+        
+        
+        
+        
+    }
+}
+
+
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -81,27 +184,49 @@
     
     if ([self TarminateWhiteSpace:_Signup_name.text].length==0)
     {
-        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Name Alert" message:@" Name field blank" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertreg show];
+//        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Name Alert" message:@" Name field blank" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alertreg show];
+        
+        _Signup_name.placeholder=@"Please enter your name";
+        
     }
     else if (![self validateEmail:[_Signup_email text]])
     {
         
     }
+    else if ([_Signup_password.text isEqualToString:@""])
+    {
+        //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Password Alert" message:@"Password  Mismatches" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        //        [alert show];
+        
+        _Signup_password.placeholder=@"Please enter valid password";
+        
+        
+    }
+
     else if (![_Signup_password.text isEqualToString:_Signup_confrmpwd.text])
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Password Alert" message:@"Password  Mismatches" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+//        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Password Alert" message:@"Password  Mismatches" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alert show];
+        
+        _Signup_confrmpwd.text=@"";
+        
+              _Signup_confrmpwd.placeholder=@"Password doesn't match";
+
         
     }
     else if (gender.text.length==0)
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Gender" message:@"Select Gender" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Please select your Gender" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
+        
+        
+        
+        
     }
     else if (dateShowlbl.text.length==0)
     {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Date of Birth" message:@"Select Date of Birth" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Sorry" message:@"Select Date of Birth" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
     
@@ -201,7 +326,11 @@
         
         picker.datePickerMode=UIDatePickerModeDate;
         //    picker.hidden=NO;
-        picker.date=[NSDate date];
+
+        
+        NSDate *minYearDate = [[NSDate date] dateByAddingTimeInterval: -473040000.0];
+        picker.maximumDate=minYearDate;
+
         
         UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(-15,225,187,42)];
         btn.backgroundColor=[UIColor colorWithRed:(51.0f/255.0f) green:(26.0f/255.0f) blue:(47.0f/255.0f) alpha:1];
@@ -235,7 +364,11 @@
         
         picker.datePickerMode=UIDatePickerModeDate;
         //    picker.hidden=NO;
-        picker.date=[NSDate date];
+   
+        
+        NSDate *minYearDate = [[NSDate date] dateByAddingTimeInterval: -473040000.0];
+        picker.maximumDate=minYearDate;
+
         
         UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0,225,185,40)];
         btn.backgroundColor=[UIColor colorWithRed:(51.0f/255.0f) green:(26.0f/255.0f) blue:(47.0f/255.0f) alpha:1];
@@ -271,7 +404,11 @@
         
         picker.datePickerMode=UIDatePickerModeDate;
         //    picker.hidden=NO;
-        picker.date=[NSDate date];
+       
+        
+        NSDate *minYearDate = [[NSDate date] dateByAddingTimeInterval: -473040000.0];
+        picker.maximumDate=minYearDate;
+
         
         UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(-7,225,187,42)];
         btn.backgroundColor=[UIColor colorWithRed:(51.0f/255.0f) green:(26.0f/255.0f) blue:(47.0f/255.0f) alpha:1];
@@ -304,7 +441,10 @@
         
         picker.datePickerMode=UIDatePickerModeDate;
         //    picker.hidden=NO;
-        picker.date=[NSDate date];
+   
+        
+        NSDate *minYearDate = [[NSDate date] dateByAddingTimeInterval: -473040000.0];
+        picker.maximumDate=minYearDate;
         
         UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(15,225,187,42)];
         btn.backgroundColor=[UIColor colorWithRed:(51.0f/255.0f) green:(26.0f/255.0f) blue:(47.0f/255.0f) alpha:1];
@@ -452,8 +592,11 @@
     if(![emailTest evaluateWithObject:_Signup_email.text])
     {
         ////NSLog(@"Invalid email address found");
-        UIAlertView *objAlert = [[UIAlertView alloc] initWithTitle:@"Mail alert" message:@"Please enter valid Emailid." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close",nil];
-        [objAlert show];
+//        UIAlertView *objAlert = [[UIAlertView alloc] initWithTitle:@"Mail alert" message:@"Please enter valid Emailid." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close",nil];
+//        [objAlert show];
+        
+        _Signup_email.text=@"";
+        _Signup_email.placeholder=@"Please enter valid email id";
         
         return FALSE;
     }

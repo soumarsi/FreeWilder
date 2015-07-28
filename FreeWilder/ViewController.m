@@ -10,7 +10,9 @@
 #import <AddressBook/ABAddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
+
 @interface ViewController ()<UITextFieldDelegate,UIAlertViewDelegate>
 
 
@@ -28,6 +30,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *password;
 
 @property (strong, nonatomic)NSMutableArray *jsonResult;
+
+@property(nonatomic,strong)UISegmentedControl *segControl;
 
 @end
 
@@ -77,7 +81,7 @@
     _jsonResult = [[NSMutableArray alloc]init];
     forgotArray = [[NSMutableArray alloc]init];
     
-    email.placeholder=@"Username";
+    email.placeholder=@"Email";
     password.placeholder=@"Password";
     lblLogin.text=@"Login with your";
     lblFacebook.text=@"Facebook";
@@ -93,10 +97,181 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [textField becomeFirstResponder];
+    
+    if([textField isEqual:email])
+    {
+        textField.keyboardType=UIKeyboardTypeEmailAddress;
+        
+    [UIView animateWithDuration:0.8 animations:^{
+        
+        
+       // CGRect mainFrame=self.view.frame;
+        
+        if([[UIScreen mainScreen] bounds].size.height==568)
+        {
+        
+             CGRect tempFrame=CGRectMake(0, -75, self.view.bounds.size.width, self.view.bounds.size.height);
+            
+            self.view.frame=tempFrame;
+        
+        
+        }
+    
+ else  if([[UIScreen mainScreen] bounds].size.height==667)
+   {
+   
+          CGRect tempFrame=CGRectMake(0, -55, self.view.bounds.size.width, self.view.bounds.size.height);
+   
+          self.view.frame=tempFrame;
+   }
+        
+ else  if([[UIScreen mainScreen] bounds].size.height==736)
+ {
+     
+     CGRect tempFrame=CGRectMake(0, -55, self.view.bounds.size.width, self.view.bounds.size.height);
+     
+     self.view.frame=tempFrame;
+ }
+
+
+        
+        
+
+        
+        
+    }];
+    }
+    
+    else if ([textField isEqual:password])
+    {
+    
+    
+        [UIView animateWithDuration:0.8 animations:^{
+            
+            
+            if([[UIScreen mainScreen] bounds].size.height==568)
+            {
+                
+                CGRect tempFrame=CGRectMake(0, -75, self.view.bounds.size.width, self.view.bounds.size.height);
+                
+                self.view.frame=tempFrame;
+                
+                
+            }
+            
+            else  if([[UIScreen mainScreen] bounds].size.height==667)
+            {
+                
+                CGRect tempFrame=CGRectMake(0, -55, self.view.bounds.size.width, self.view.bounds.size.height);
+                
+                self.view.frame=tempFrame;
+            }
+            
+            else  if([[UIScreen mainScreen] bounds].size.height==736)
+            {
+                
+                CGRect tempFrame=CGRectMake(0, -55, self.view.bounds.size.width, self.view.bounds.size.height);
+                
+                self.view.frame=tempFrame;
+            }
+            
+            
+            
+        }];
+    
+    
+    
+    }
+    
+    
+     textField.inputAccessoryView = [self keyboardToolBar];
+    
+    if([textField isEqual:email])
+    {
+    
+       [self.segControl setEnabled:NO forSegmentAtIndex:0];
+    
+    
+    }
+    
+    else     if([textField isEqual:password])
+    {
+        
+        [self.segControl setEnabled:NO forSegmentAtIndex:1];
+        
+        
+    }
+    
+    
+    
 }
+
+
+- (UIToolbar *)keyboardToolBar {
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+    [toolbar sizeToFit];
+    
+    self.segControl = [[UISegmentedControl alloc] initWithItems:@[@"Previous", @"Next"]];
+    
+    [self.segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    
+    self.segControl.momentary = YES;
+    
+    [self.segControl addTarget:self action:@selector(changeRow:) forControlEvents:(UIControlEventValueChanged)];
+    
+//    [self.segControl setEnabled:NO forSegmentAtIndex:0];
+    
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithCustomView:self.segControl];
+    
+    NSArray *itemsArray = @[nextButton];
+    
+    [toolbar setItems:itemsArray];
+    
+    return toolbar;
+}
+
+
+
+- (void)changeRow:(id)sender {
+    
+    int idx = (int)[sender selectedSegmentIndex];
+    
+    if (idx==1) {
+        //self.topText.text = @"Top one";
+        [self.password becomeFirstResponder];
+    }
+    else if(idx==0){
+       // self.bottomText.text =@"Bottom one";
+        [self.email becomeFirstResponder];
+    }
+}
+
+
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        
+        
+        CGRect mainFrame=self.view.frame;
+        
+        CGRect tempFrame=mainFrame;
+        
+        tempFrame.origin.y=0;
+        
+        self.view.frame=tempFrame;
+        
+           [textField resignFirstResponder];
+        
+        
+    }];
+ 
+ 
     return YES;
 }
 
@@ -106,9 +281,40 @@
 }
 
 - (IBAction)login_button:(id)sender
-{//_jsonResult=[[NSMutableArray alloc]init];
+{
+    if([email.text length]==0 && [password.text length]==0)
+    {
+        
+        email.placeholder=@"Enter email id";
+        
+        password.placeholder=@"Enter valid password";
+        
+        
+    }
+    else   if([email.text length]==0 && [password.text length]>0)
+    {
+        
+        email.placeholder=@"Enter email id";
+        
+      //  password.placeholder=@"Enter valid password";
+        
+        
+    }
     
-  //   NSString *urlstring=[NSString stringWithFormat:@"%@verify_app_login?email=%@&password=%@",App_Domain_Url,email.text,password.text];
+    else   if([email.text length]>0 && [password.text length]==0)
+    {
+        
+       // email.placeholder=@"Enter email id";
+        
+         password.placeholder=@"Enter valid password";
+        
+        
+    }
+
+    
+    
+ else   if([email.text length]>0 && [password.text length]>0)
+    {
     
     NSString *urlstring=[NSString stringWithFormat:@"%@verify_app_login?email=%@&password=%@",App_Domain_Url,[email.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[password.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
@@ -127,6 +333,10 @@
         [[NSUserDefaults standardUserDefaults] setObject:[_jsonResult valueForKey:@"site_user_id"]  forKey:@"UserId"];
             [[NSUserDefaults standardUserDefaults] setObject:[_jsonResult valueForKey:@"user_name"]  forKey:@"UserName"];
             [[NSUserDefaults standardUserDefaults] setObject:[_jsonResult valueForKey:@"user_image"]  forKey:@"UserImage"];
+            
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"Logged in"] forKey:@"logInCheck"];
+            
+            
             ViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Dashboard"];
             [self.navigationController pushViewController:obj animated:YES];
         
@@ -141,6 +351,8 @@
         
         
     }];
+        
+    }
     
     
 //    ViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Dashboard"];
@@ -379,6 +591,34 @@
     
     return img;
 }
+
+
+- (IBAction)fbLogIn:(id)sender
+{
+    
+    
+    if ([FBSession activeSession].state != FBSessionStateOpen &&
+        [FBSession activeSession].state != FBSessionStateOpenTokenExtended )
+        
+        
+    {
+        //[self UserInformation];
+        
+        NSLog(@"Facebook logging in....");
+        
+        AppDelegate *app=[[UIApplication sharedApplication]delegate];
+        
+        [app openActiveSessionWithPermissions:@[@"public_profile", @"email"] allowLoginUI:YES];
+        
+        
+        
+    }
+
+    
+    
+    
+}
+
 
 
 @end

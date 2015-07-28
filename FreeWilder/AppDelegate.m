@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "DashboardViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,9 +17,94 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
+    NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+    
+    // [userData setObject:session forKey:@"session"];
+   // [userData setObject:[NSNumber numberWithInteger:status] forKey:@"status"];
+    
+    
+    
+    
+    if([userData valueForKey:@"status"] || [[userData valueForKey:@"logInCheck"] isEqualToString:@"Logged in"])
+    {
+        
+        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+        
+        DashboardViewController *dashVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Dashboard"];
+        [navigationController pushViewController:dashVC animated:YES];
+        
+        
+    }
+
+    
+    
+    
     // Override point for customization after application launch.
     return YES;
 }
+
+
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+}
+
+
+-(void)openActiveSessionWithPermissions:(NSArray *)permissions allowLoginUI:(BOOL)allowLoginUI
+{
+    [FBSession openActiveSessionWithReadPermissions:permissions
+                                       allowLoginUI:allowLoginUI
+                                  completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                      
+                                      
+                                      [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, FBGraphObject *result, NSError *error) {
+                                          if (result && !error) {
+                                              
+                                              
+                                              
+                                              NSUserDefaults *userData=[NSUserDefaults standardUserDefaults];
+                                              
+                                              // [userData setObject:session forKey:@"session"];
+                                              [userData setObject:[NSNumber numberWithInteger:status] forKey:@"status"];
+                                              [userData setObject:result[@"id"] forKey:@"fbID"];
+                                              
+                                              [userData synchronize];
+                                              
+                                              NSLog(@"Status facebook: %lu",(long)[userData valueForKey:@"status"]);
+                                              NSLog(@"Status facebook: %@",[userData valueForKey:@"fbID"]);
+                                              
+                                              
+                                          } else {
+                                              NSLog(@"Error!");
+                                          }
+                                      }];
+                                      
+                                      
+                                      
+                                      
+                                      
+                                      if(!error)
+                                      {
+                                          
+                                          UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+                                          
+                                          DashboardViewController *dashVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Dashboard"];
+                                          [navigationController pushViewController:dashVC animated:YES];
+                                          
+                                          
+                                      }
+                                      
+                                      
+                                      // Create a new notification, add the sessionStateInfo dictionary to it and post it.
+                                      
+                                      
+                                  }];
+}
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
