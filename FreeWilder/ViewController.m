@@ -317,7 +317,9 @@
     {
     
     NSString *urlstring=[NSString stringWithFormat:@"%@verify_app_login?email=%@&password=%@",App_Domain_Url,[email.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[password.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
+        BOOL net=[globalobj connectedToNetwork];
+        if (net==YES)
+        {
     [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
         
         
@@ -351,6 +353,13 @@
         
         
     }];
+        }
+        else{
+          
+            UIAlertView *aler=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"No Network Connection." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [aler show];
+        }
+
         
     }
     

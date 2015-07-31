@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DashboardViewController.h"
-
+#import "FindInterestsViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -29,12 +29,10 @@
     
     if([userData valueForKey:@"status"] || [[userData valueForKey:@"logInCheck"] isEqualToString:@"Logged in"])
     {
-        
-        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-        
-        DashboardViewController *dashVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Dashboard"];
-        [navigationController pushViewController:dashVC animated:YES];
-        
+       
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        FindInterestsViewController * vc=[storyboard instantiateViewControllerWithIdentifier:@"Interest_page"];
+        [(UINavigationController*)self.window.rootViewController pushViewController:vc animated:NO];
         
     }
 

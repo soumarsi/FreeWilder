@@ -121,6 +121,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1455,7 +1456,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="230" sectionHeaderHeight="22" sectionFooterHeight="22" id="NLh-CB-62i">
-                                <rect key="frame" x="0.0" y="126.0000013153972" width="320" height="393"/>
+                                <rect key="frame" x="0.0" y="126.000002754984" width="320" height="393"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1725,7 +1726,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="rfA-CQ-P13">
-                                <rect key="frame" x="0.0" y="128.00000231276067" width="320" height="388"/>
+                                <rect key="frame" x="0.0" y="128.00000260973556" width="320" height="388"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1980,7 +1981,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="230" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rst-fX-ssl">
-                                        <rect key="frame" x="0.0" y="79.999998024728498" width="320" height="438"/>
+                                        <rect key="frame" x="0.0" y="79.999997235297059" width="320" height="438"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -2081,7 +2082,7 @@
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="9Kn-1d-Yor">
-                                        <rect key="frame" x="0.0" y="80" width="320" height="436"/>
+                                        <rect key="frame" x="0.0" y="80" width="320" height="437.99999723529703"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" minimumFontSize="17" background="topbar" id="doB-BB-D3T">
@@ -2175,7 +2176,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Gkv-hV-gnE">
-                                                <rect key="frame" x="0.0" y="390" width="320" height="46"/>
+                                                <rect key="frame" x="0.0" y="389.99999723529703" width="320" height="46"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" red="0.13069165267639793" green="0.55560267193998814" blue="0.35134326999980059" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
@@ -2188,9 +2189,16 @@
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchWhite" id="v5z-la-X3G">
-                                                <rect key="frame" x="96" y="402" width="22" height="22"/>
+                                                <rect key="frame" x="96" y="401.99999723529703" width="22" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </imageView>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no value to search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IHj-xd-uin">
+                                                <rect key="frame" x="60" y="361" width="201" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -2215,6 +2223,7 @@
                         <outlet property="btnSearch" destination="Gkv-hV-gnE" id="ehM-Qr-dmS"/>
                         <outlet property="btnTime" destination="2YZ-iF-p7E" id="gax-F6-tor"/>
                         <outlet property="footer_base" destination="UIW-2Y-YPJ" id="Iyb-mm-YlS"/>
+                        <outlet property="lblMesg" destination="IHj-xd-uin" id="YC4-NA-sMa"/>
                         <outlet property="lblPageTitle" destination="OY4-m1-qYn" id="Yiu-qp-Ezg"/>
                         <outlet property="lblProduct" destination="52M-De-xKa" id="kZz-yO-OZc"/>
                         <outlet property="txtDays" destination="nSM-S5-gV7" id="2AN-n6-r7i"/>

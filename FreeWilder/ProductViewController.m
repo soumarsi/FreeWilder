@@ -84,11 +84,7 @@
         [ArrProductList removeAllObjects];
         // data present in core data so show data from core data
         NSLog(@"data from local db");
-//<<<<<<< Updated upstream
-       // NSInteger datacount;
-//=======
-     //   NSInteger datacount;
-//>>>>>>> Stashed changes
+
         for (NSManagedObject *obj1 in fetchrequest)
         {
             
@@ -101,7 +97,7 @@
             }
         }
         
-        NSLog(@"arra-- %@", ArrProductList);
+    //    NSLog(@"arra-- %@", ArrProductList);
         
      //   NSLog(@"arr count=%lu",(unsigned long)[ArrProductList count]);
         [ProductListingTable reloadData];
@@ -136,7 +132,87 @@
                 // local data and url data same
                 if (ArrProductList.count==tempArr.count)
                 {
-                    //do nothing
+                    //do nothing, but as edit is enabled so .....
+                    
+                    //delete the particular category data from core data
+                    NSLog(@"delete the particular category data from core data");
+                    NSManagedObjectContext *context3=[appDelegate managedObjectContext];
+                    NSEntityDescription *productEntity=[NSEntityDescription entityForName:@"ProductList" inManagedObjectContext:context3];
+                    NSFetchRequest *fetch=[[NSFetchRequest alloc] init];
+                    [fetch setEntity:productEntity];
+                    NSPredicate *p=[NSPredicate predicateWithFormat:@"categoryId == %@", CategoryId];
+                    [fetch setPredicate:p];
+                    //... add sorts if you want them
+                    NSError *fetchError;
+                    NSError *error;
+                    NSArray *fetchedProducts=[context3 executeFetchRequest:fetch error:&fetchError];
+                    for (NSManagedObject *product in fetchedProducts)
+                    {
+                        [context3 deleteObject:product];
+                    }
+                    [context3 save:&error];
+                    
+                    // put url data in core data
+                    for ( NSDictionary *tempDict1 in  [result objectForKey:@"details"])
+                    {
+                        NSLog(@"putting data in core data.");
+                        NSManagedObjectContext *context=[appDelegate managedObjectContext];
+                        NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"ProductList" inManagedObjectContext:context];
+                        NSLog(@"cat id=%@",CategoryId);
+                        [manageobject setValue:CategoryId forKey:@"categoryId"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"category_name"] forKey:@"categoryname"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"date"] forKey:@"date"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"description"] forKey:@"desp"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"start_time"] forKey:@"start_time"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"close_time"] forKey:@"end_time"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
+                        [manageobject setValue:@"1" forKey:@"productid"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"description"] forKey:@"desp"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"name"] forKey:@"productname"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"ratings"] forKey:@"rating"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
+                        [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]]] forKey:@"productimage"];
+                        //     UIImageView *productimgview=[[UIImageView alloc]init];
+                        //    [productimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@""] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                        
+                        //   NSLog(@"image=%@",productimgview.image);
+                        //   NSData *imgData= UIImagePNGRepresentation(productimgview.image);
+                        //   [manageobject setValue:imgData forKey:@"productimage"];
+                        
+                        //    UIImageView *userimgview=[[UIImageView alloc]init];
+                        //     [userimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]] placeholderImage:[UIImage imageNamed:@"Profile_image_placeholder"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                        //     NSLog(@"image=%@",productimgview.image);
+                        //     NSData *imgData1= UIImagePNGRepresentation(userimgview.image);
+                        //      [manageobject setValue:imgData1 forKey:@"userimage"];
+                        
+                        [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]]] forKey:@"userimage"];
+                        [appDelegate saveContext];
+                    }
+                    
+                    // data show from core data
+                    [ArrProductList removeAllObjects];
+                    NSManagedObjectContext *context5=[appDelegate managedObjectContext];
+                    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"ProductList"];
+                    NSMutableArray *fetchrequest=[[context5 executeFetchRequest:request error:nil] mutableCopy];
+                    for (NSManagedObject *obj1 in fetchrequest)
+                    {
+                        
+                        
+                        if ([[obj1 valueForKey:@"categoryId"] isEqualToString:CategoryId])
+                        {
+                            
+                            [ArrProductList addObject:obj1];
+                            lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
+                        }
+                    }
+                    
+                    [ProductListingTable reloadData];
+                    
+                    
+                    
+                    
+                    
+                    
                 }
                 else
                 {
@@ -560,7 +636,7 @@
         cell.UserImage.image=[UIImage imageWithData:dataBytes1];
         if (cell.UserImage.image==nil)
         {
-             NSLog(@"data byte=%@",cell.UserImage.image);
+          //   NSLog(@"data byte=%@",cell.UserImage.image);
             cell.UserImage.image=[UIImage imageNamed:@"Profile_image_placeholder"];
         }
        

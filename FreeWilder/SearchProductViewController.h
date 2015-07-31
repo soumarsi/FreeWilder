@@ -46,6 +46,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *SearchTable;
 - (IBAction)BackClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *lblMesg;
 
 
 @end

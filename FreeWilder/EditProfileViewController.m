@@ -298,7 +298,7 @@
                              }
                              else
                              {
-                                 [self.mainscroll setContentOffset:CGPointMake(0.0f, 100.0f) animated:YES];
+                                 [self.mainscroll setContentOffset:CGPointMake(0.0f, 150.0f) animated:YES];
                              }
                          }
                          else if(textField==txtEmail)
@@ -362,14 +362,58 @@
     [[[[self navigationController] view] layer] addAnimation:Transition forKey:nil];
     [[self navigationController] popViewControllerAnimated:NO];
 }
+-(NSString *)TarminateWhiteSpace:(NSString *)Str
+{
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *trimmed = [Str stringByTrimmingCharactersInSet:whitespace];
+    return trimmed;
+}
+- (BOOL)validateEmail:(NSString *)emailStr{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    if(![emailTest evaluateWithObject:txtEmail.text])
+    {
+        ////NSLog(@"Invalid email address found");
+        //        UIAlertView *objAlert = [[UIAlertView alloc] initWithTitle:@"Mail alert" message:@"Please enter valid Emailid." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close",nil];
+        //        [objAlert show];
+        
+        txtEmail.text=@"";
+        txtEmail.placeholder=@"Please enter valid email id";
+        
+        return FALSE;
+    }
+    return TRUE;
+}
 
 - (IBAction)SaveClick:(id)sender
 {
-    [self UpdateProfileUrl];
+    if ([self TarminateWhiteSpace:txtUserName.text].length==0)
+    {
+        txtUserName.placeholder=@"Enter Name";
+    }
+    
+    else if (![self validateEmail:[txtEmail text]])
+    {
+        
+    }
+    else if ([self TarminateWhiteSpace:txtPhone.text].length==0)
+    {
+        txtPhone.placeholder=@"Enter Phone Number";
+    }
+    else
+    {
+        [self UpdateProfileUrl];
+    }
+    
+        
 }
 -(void)UpdateProfileUrl
 {
-    
+    BOOL net=[urlobj connectedToNetwork];
+    if (net==YES)
+    {
+   
+
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
     
@@ -419,95 +463,13 @@
                                                            
                                                        }];
     [dataTask resume];
-     
-    /*
-   NSDictionary *tempDict = [[NSDictionary alloc] initWithObjectsAndKeys:[UserId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"user_id",[txtUserName.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"name",[txtEmail.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"email",[txtPhone.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],@"phone_no",nil];
-      NSLog(@"tempdic=%@",tempDict);
-    NSString *urlstring = [NSString stringWithFormat:@"%@app_edit_profile",App_Domain_Url];
-    NSLog(@"str=%@",urlstring);
-    NSError *localErr;
-    
-    NSData *jsonData2 = [NSJSONSerialization dataWithJSONObject:(NSDictionary *) tempDict options:NSJSONWritingPrettyPrinted error:&localErr];
-    
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData2 encoding:NSUTF8StringEncoding];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]];
-    
-    NSString *params = jsonString; //[jsonString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    [request setHTTPMethod:@"POST"];
-    
-    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    
-    [request setHTTPShouldHandleCookies:NO];
-    
-    [request setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    
-    BOOL net=[urlobj connectedToNetwork];
-    if (net==YES) {
-        //   [self checkLoader];
-      [urlobj globalPost:request typerequest:@"array" withblock:^(id result, NSError *error,BOOL completed) {
-            
-            NSLog(@"event result----- %@", result);
-            //    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-            //    dic=[result valueForKey:@"response"];
-            
-            
-            
-            
-            
-        }];
     }
     else{
-        
+       
         UIAlertView *aler=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"No Network Connection." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [aler show];
     }
-    */
-    /*
-    BOOL net=[globalobj connectedToNetwork];
-    if (net==YES) {
-       
-       
-       [globalobj globalPost:urlstring Dictionary:tempDict typerequest:@"array" Withblock:^(id result, NSError *error) {
-            
-            NSLog(@"event result----- %@", result);
-            //    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-            //    dic=[result valueForKey:@"response"];
-            
-            
-     
-            if ([[result valueForKey:@"IsSuccess"] integerValue]==1) {
-                
-               
-                
-                UIAlertView *aler=[[UIAlertView alloc] initWithTitle:@"Success" message:@"Your Account Updated Successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-               [aler show];
-               
-            }
-            else
-            {
-                //  [self checkLoader];
-              
-                
-                UIAlertView *aler=[[UIAlertView alloc] initWithTitle:@"Error" message:@"Unsucessful...." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [aler show];
-            }
-     
-            
-        }];
-    }
-    else{
-        
-        
-        UIAlertView *aler=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"No Network Connection." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [aler show];
-    }
-*/
-}
+   }
 - (IBAction)ImageClick:(id)sender
 {
     actionsheet=[[UIActionSheet alloc]initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];

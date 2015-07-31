@@ -13,7 +13,7 @@
 @end
 
 @implementation SearchProductViewController
-@synthesize txtPreductName,txtLocation,LocationView,btnDate,btnTime,btnSearch,SearchTable,txtDays,txtTime,btnBack,lblProduct,lblPageTitle;
+@synthesize txtPreductName,txtLocation,LocationView,btnDate,btnTime,btnSearch,SearchTable,txtDays,txtTime,btnBack,lblProduct,lblPageTitle,lblMesg;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -541,11 +541,42 @@
         
     }
 }
+-(NSString *)TarminateWhiteSpace:(NSString *)Str
+{
+    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *trimmed = [Str stringByTrimmingCharactersInSet:whitespace];
+    return trimmed;
+}
 - (IBAction)SearchClick:(id)sender
 {
-    LocationView.hidden=YES;
-    btnBack.hidden=NO;
+    if ([self TarminateWhiteSpace:txtPreductName.text].length==0 && [self TarminateWhiteSpace:txtLocation.text].length==0 && [self TarminateWhiteSpace:txtDays.text].length==0 && [self TarminateWhiteSpace:txtTime.text].length==0)
+    {
+        lblMesg.hidden=NO;
+        lblMesg.text=@"There is no value to search";
+        [lblMesg setAlpha:0.0f];
+        
+        //fade in
+        [UIView animateWithDuration:2.0f animations:^{
+            
+            [lblMesg setAlpha:1.0f];
+            
+        } completion:^(BOOL finished) {
+            
+            //fade out
+            [UIView animateWithDuration:2.0f animations:^{
+                
+                [lblMesg setAlpha:0.0f];
+                
+            } completion:nil];
+            
+        }];
+    }
+    else
+    {
+        lblMesg.hidden=YES;
+   
     [self SearchUrl];
+    }
 }
 -(void)SearchUrl
 {
@@ -554,6 +585,10 @@
     
     NSString *urlstring=[NSString stringWithFormat:@"%@app_product_details_cat?servicename=%@&serviceplae=%@&opendate=%@&timeopen=%@",App_Domain_Url,[txtPreductName.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[txtLocation.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[txtDays.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],[txtTime.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSLog(@"str=%@",urlstring);
+    
+    BOOL net=[globalobj connectedToNetwork];
+    if (net==YES)
+    {
     [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
         
         //   NSLog(@"result=%@",result);
@@ -578,16 +613,47 @@
             NSLog(@"No product found");
             [SearchTable reloadData];
         }
+        
+        
         if (ArrSearchList.count==0)
         {
             lblProduct.text=@"No Product Found";
             NSLog(@"No product found");
+            lblMesg.text=@"No product found";
+            lblMesg.hidden=NO;
+            [lblMesg setAlpha:0.0f];
+            
+            //fade in
+            [UIView animateWithDuration:2.0f animations:^{
+                
+                [lblMesg setAlpha:1.0f];
+                
+            } completion:^(BOOL finished) {
+                
+                //fade out
+                [UIView animateWithDuration:2.0f animations:^{
+                    
+                    [lblMesg setAlpha:0.0f];
+                    
+                } completion:nil];
+                
+            }];
         }
         else
         {
+            lblMesg.hidden=YES;
+            LocationView.hidden=YES;
+            btnBack.hidden=NO;
             lblProduct.text=@"";
         }
+        
         }];
+    }
+    else{
+       
+        UIAlertView *aler=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"No Network Connection." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [aler show];
+    }
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

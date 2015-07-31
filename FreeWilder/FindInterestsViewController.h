@@ -10,6 +10,7 @@
 #import "Side_menu.h"
 #import "FW_JsonClass.h"
 #import "ProductViewController.h"
+#import "AppDelegate.h"
 @interface FindInterestsViewController : UIViewController<Slide_menu_delegate>
 
 {
@@ -17,6 +18,9 @@
     
     Side_menu *sidemenu;
     UIView *overlay;
+     AppDelegate *appDelegate;
+    bool localdata;
+    FW_JsonClass *jsonObj;
 }
 @property (strong, nonatomic) IBOutlet UIView *footer_base;
 @property (weak, nonatomic) IBOutlet UIScrollView *findscrollview;

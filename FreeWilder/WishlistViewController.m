@@ -137,7 +137,77 @@
                 // local data and url data same
                 if (ArrWishList.count==tempArr.count)
                 {
-                    //do nothing
+                    //do nothing but if edit is enabled so...
+                    
+                    //delete the particular user data from core data
+                    NSLog(@"delete the particular user id data from core data");
+                    NSManagedObjectContext *context3=[appDelegate managedObjectContext];
+                    NSEntityDescription *productEntity=[NSEntityDescription entityForName:@"WishList" inManagedObjectContext:context3];
+                    NSFetchRequest *fetch=[[NSFetchRequest alloc] init];
+                    [fetch setEntity:productEntity];
+                    NSPredicate *p=[NSPredicate predicateWithFormat:@"userId == %@", UserId];
+                    [fetch setPredicate:p];
+                    //... add sorts if you want them
+                    NSError *fetchError;
+                    NSError *error;
+                    NSArray *fetchedProducts=[context3 executeFetchRequest:fetch error:&fetchError];
+                    for (NSManagedObject *product in fetchedProducts)
+                    {
+                        [context3 deleteObject:product];
+                    }
+                    [context3 save:&error];
+                    
+                    // put url data in core data
+                    for ( NSDictionary *tempDict1 in  [result objectForKey:@"my_wishlist"])
+                    {
+                        NSLog(@"putting data in core data.");
+                        NSManagedObjectContext *context=[appDelegate managedObjectContext];
+                        NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"WishList" inManagedObjectContext:context];
+                        NSLog(@"user id=%@",UserId);
+                        [manageobject setValue:UserId forKey:@"userId"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"wishlist_id"] forKey:@"wishId"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"name"] forKey:@"name"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"category"] forKey:@"category"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"location"] forKey:@"location"];
+                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
+                        [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"image"]]]] forKey:@"image"];
+                        
+                        //     UIImageView *productimgview=[[UIImageView alloc]init];
+                        //    [productimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@""] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                        
+                        //   NSLog(@"image=%@",productimgview.image);
+                        //   NSData *imgData= UIImagePNGRepresentation(productimgview.image);
+                        //   [manageobject setValue:imgData forKey:@"productimage"];
+                        
+                        //    UIImageView *userimgview=[[UIImageView alloc]init];
+                        //     [userimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]] placeholderImage:[UIImage imageNamed:@"Profile_image_placeholder"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                        //     NSLog(@"image=%@",productimgview.image);
+                        //     NSData *imgData1= UIImagePNGRepresentation(userimgview.image);
+                        //      [manageobject setValue:imgData1 forKey:@"userimage"];
+                        
+                        
+                        [appDelegate saveContext];
+                    }
+                    
+                    // data show from core data
+                    [ArrWishList removeAllObjects];
+                    NSManagedObjectContext *context5=[appDelegate managedObjectContext];
+                    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"WishList"];
+                    NSMutableArray *fetchrequest=[[context5 executeFetchRequest:request error:nil] mutableCopy];
+                    for (NSManagedObject *obj1 in fetchrequest)
+                    {
+                        
+                        
+                        if ([[obj1 valueForKey:@"userId"] isEqualToString:UserId])
+                        {
+                            
+                            [ArrWishList addObject:obj1];
+                            //   lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
+                        }
+                    }
+                    
+                    [tblWishList reloadData];
+                    
                 }
                 else
                 {
@@ -221,7 +291,15 @@
             }
         }];
         
-        
+        if (ArrWishList.count==0)
+        {
+            lblWishlist.text=@"No Data Found";
+            NSLog(@"no service");
+        }
+        else
+        {
+            lblWishlist.text=@"";
+        }
         
     }
     else
@@ -289,6 +367,15 @@
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     }];
                 }];
+                if (ArrWishList.count==0)
+                {
+                    lblWishlist.text=@"No Data Found";
+                    NSLog(@"no service");
+                }
+                else
+                {
+                    lblWishlist.text=@"";
+                }
             }
             else
             {
@@ -305,15 +392,7 @@
         }];
     }
     
-    if (ArrWishList.count==0)
-    {
-        lblWishlist.text=@"No Data Found";
-        NSLog(@"no service");
-    }
-    else
-    {
-        lblWishlist.text=@"";
-    }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
