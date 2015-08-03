@@ -70,13 +70,47 @@
     [btnSave setTitle:@"Save" forState:UIControlStateNormal];
     lblPagetitle.text=@"Edit Profile";
     
+    //done button on numeric keyboard
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 35.0f)];
+    toolbar.barStyle=UIBarStyleDefault;
+    //    // Create a flexible space to align buttons to the right
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    //    // Create a cancel button to dismiss the keyboard
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(resetView)];
+    //    // Add buttons to the toolbar
+    [toolbar setItems:[NSArray arrayWithObjects:flexibleSpace, barButtonItem, nil]];
+    // Set the toolbar as accessory view of an UITextField object
+    txtPhone.inputAccessoryView = toolbar;
+
+    
+    
     [self ProfileDetailUrl];
     
+}
+-(void)resetView
+{
+    [txtPhone resignFirstResponder];
+    [UIView animateWithDuration:0.4f
+     // delay:0.1f
+     // options:UIViewAnimationTransitionNone
+                     animations:^{
+                         
+                         [self.mainscroll setContentOffset:CGPointMake(0.0f, 0.0f) animated:YES];
+                         
+                         
+                     }
+                     completion:^(BOOL finished){
+                         
+                     }
+     ];
 }
 -(void)ProfileDetailUrl
 {
     NSString *urlstring=[NSString stringWithFormat:@"%@verify_app_profile?user_id=%@",App_Domain_Url,[UserId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
+    BOOL net=[globalobj connectedToNetwork];
+    if (net==YES)
+    {
     [globalobj GlobalDict:urlstring Globalstr:@"array" Withblock:^(id result, NSError *error) {
         
         NSLog(@"result=%@",result);
@@ -117,6 +151,21 @@
         
         
     }];
+    }
+    else{
+        
+        UIAlertView *aler=[[UIAlertView alloc] initWithTitle:@"Alert" message:@"No Network Connection." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [aler show];
+        
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        lblUserName.text=[prefs valueForKey:@"UserName"];
+        txtUserName.text=[prefs valueForKey:@"UserName"];
+        ProfileImg.userInteractionEnabled=YES;
+        [ProfileImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[prefs valueForKey:@"UserImage"]]] placeholderImage:[UIImage imageNamed:@"demo_image"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+        ProfileImg.contentMode=UIViewContentModeScaleAspectFill;
+        ProfileImg.clipsToBounds = YES;
+        ProfileImg.layer.cornerRadius = ProfileImg.frame.size.width/2;
+    }
 }
 -(void)pushmethod:(UIButton *)sender
 {
@@ -294,11 +343,11 @@
                              
                              if ([UIScreen mainScreen].bounds.size.width>320)
                              {
-                                 [self.mainscroll setContentOffset:CGPointMake(0.0f, 50.0f) animated:YES];
+                                 [self.mainscroll setContentOffset:CGPointMake(0.0f, 150.0f) animated:YES];
                              }
                              else
                              {
-                                 [self.mainscroll setContentOffset:CGPointMake(0.0f, 150.0f) animated:YES];
+                                 [self.mainscroll setContentOffset:CGPointMake(0.0f, 170.0f) animated:YES];
                              }
                          }
                          else if(textField==txtEmail)
@@ -432,9 +481,9 @@
                                                             //   NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
             id  result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                                                                NSLog(@"Data = %@",result);
-                                                               if([[result valueForKey:@"response"] isEqualToString:@"Success"])
+                                        if([[result valueForKey:@"response"] isEqualToString:@"Success"])
                                                                    
-                                                               {
+                                                    {
                                                                    UIAlertView *loginAlert=[[UIAlertView alloc]initWithTitle:@"Success" message:@"Account Updated Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                                                    [loginAlert show];
                                                                    lblUserName.text=[result valueForKey:@"name"];

@@ -867,7 +867,7 @@
         
         if (localdata)
         {
-            [temp1 setTitle:[[jsonResult objectAtIndex:(titleCount) ]valueForKey:@"categoryName"] forState:UIControlStateNormal];
+            [temp1 setTitle:[[jsonResult objectAtIndex:(titleCount)]valueForKey:@"categoryName"] forState:UIControlStateNormal];
         }
         else
         {

@@ -186,7 +186,7 @@
     {
 //        UIAlertView *alertreg=[[UIAlertView alloc]initWithTitle:@"Name Alert" message:@" Name field blank" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //        [alertreg show];
-        
+        _Signup_name.text=@"";
         _Signup_name.placeholder=@"Please enter your name";
         
     }
@@ -194,16 +194,24 @@
     {
         
     }
-    else if ([_Signup_password.text isEqualToString:@""])
+    else if ([self TarminateWhiteSpace:_Signup_password.text].length==0)
     {
         //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Password Alert" message:@"Password  Mismatches" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         //        [alert show];
-        
+        _Signup_password.text=@"";
         _Signup_password.placeholder=@"Please enter valid password";
         
         
     }
-
+    else if (_Signup_password.text.length<6)
+    {
+        //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Password Alert" message:@"Password  Mismatches" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        //        [alert show];
+        _Signup_password.text=@"";
+        _Signup_password.placeholder=@"Password be atleast 6 character";
+        
+        
+    }
     else if (![_Signup_password.text isEqualToString:_Signup_confrmpwd.text])
     {
 //        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Password Alert" message:@"Password  Mismatches" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -211,7 +219,7 @@
         
         _Signup_confrmpwd.text=@"";
         
-              _Signup_confrmpwd.placeholder=@"Password doesn't match";
+        _Signup_confrmpwd.placeholder=@"Password doesn't match";
 
         
     }
