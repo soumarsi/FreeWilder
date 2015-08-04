@@ -37,7 +37,7 @@
     [_footer_base addSubview:footer];
     
     
-    /// Getting side from Xiv & creating a black overlay
+    /// Getting side from Xib & creating a black overlay
     
     overlay=[[UIView alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     overlay.backgroundColor=[[UIColor blackColor]colorWithAlphaComponent:.6];

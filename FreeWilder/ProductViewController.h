@@ -16,6 +16,7 @@
     NSMutableArray *ArrProductList;
     AppDelegate *appDelegate;
     bool data;
+    UIView *loader_shadow_View;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *footer_base;

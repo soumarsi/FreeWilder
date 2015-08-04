@@ -22,7 +22,7 @@
     [_footer_base addSubview:footer];
     
     
-    /// Getting side from Xiv & creating a black overlay
+    /// Getting side from Xib & creating a black overlay
     
     overlay=[[UIView alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     overlay.backgroundColor=[[UIColor blackColor]colorWithAlphaComponent:.6];
@@ -53,11 +53,13 @@
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     lblPageTitle.text=@"Product Listing";
+    
     [self ProductDetailUrl];
+    
 }
 -(void)ProductDetailUrl
 {
-    
+   
     NSManagedObjectContext *context1=[appDelegate managedObjectContext];
     NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"ProductList"];
     NSMutableArray *fetchrequest=[[context1 executeFetchRequest:request error:nil] mutableCopy];
@@ -81,6 +83,7 @@
    
     if (data)
     {
+        
         [ArrProductList removeAllObjects];
         // data present in core data so show data from core data
         NSLog(@"data from local db");
@@ -102,8 +105,13 @@
      //   NSLog(@"arr count=%lu",(unsigned long)[ArrProductList count]);
         [ProductListingTable reloadData];
         
+        
         //check local data and url data same or not
         //fire url
+        
+       
+            
+            
         NSString *urlstring=[NSString stringWithFormat:@"%@app_product_details_cat?catid=%@",App_Domain_Url,[CategoryId stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSLog(@"str=%@",urlstring);
        
@@ -115,6 +123,7 @@
             if([[result valueForKey:@"response"] isEqualToString:@"success"])
                 
             {
+                
      //           NSOperationQueue *myQueue2 = [[NSOperationQueue alloc] init];
      //           [myQueue2 addOperationWithBlock:^{
                 NSMutableArray *tempArr=[[NSMutableArray alloc]init];
@@ -135,6 +144,9 @@
                     //do nothing, but as edit is enabled so .....
                     
                     //delete the particular category data from core data
+                    
+                    NSOperationQueue *myQueue22 = [[NSOperationQueue alloc] init];
+                    [myQueue22 addOperationWithBlock:^{
                     NSLog(@"delete the particular category data from core data");
                     NSManagedObjectContext *context3=[appDelegate managedObjectContext];
                     NSEntityDescription *productEntity=[NSEntityDescription entityForName:@"ProductList" inManagedObjectContext:context3];
@@ -189,6 +201,7 @@
                         [appDelegate saveContext];
                     }
                     
+                    
                     // data show from core data
                     [ArrProductList removeAllObjects];
                     NSManagedObjectContext *context5=[appDelegate managedObjectContext];
@@ -205,10 +218,12 @@
                             lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
                         }
                     }
-                    
+                   
                     [ProductListingTable reloadData];
                     
-                    
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        }];
+                    }];
                     
                     
                     
@@ -217,78 +232,87 @@
                 else
                 {
                     //delete the particular category data from core data
-                    NSLog(@"delete the particular category data from core data");
-                    NSManagedObjectContext *context3=[appDelegate managedObjectContext];
-                    NSEntityDescription *productEntity=[NSEntityDescription entityForName:@"ProductList" inManagedObjectContext:context3];
-                    NSFetchRequest *fetch=[[NSFetchRequest alloc] init];
-                    [fetch setEntity:productEntity];
-                    NSPredicate *p=[NSPredicate predicateWithFormat:@"categoryId == %@", CategoryId];
-                    [fetch setPredicate:p];
-                    //... add sorts if you want them
-                    NSError *fetchError;
-                    NSError *error;
-                    NSArray *fetchedProducts=[context3 executeFetchRequest:fetch error:&fetchError];
-                    for (NSManagedObject *product in fetchedProducts)
-                    {
-                        [context3 deleteObject:product];
-                    }
-                    [context3 save:&error];
                     
-                    // put url data in core data
-                    for ( NSDictionary *tempDict1 in  [result objectForKey:@"details"])
-                    {
-                        NSLog(@"putting data in core data.");
-                        NSManagedObjectContext *context=[appDelegate managedObjectContext];
-                        NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"ProductList" inManagedObjectContext:context];
-                        NSLog(@"cat id=%@",CategoryId);
-                        [manageobject setValue:CategoryId forKey:@"categoryId"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"category_name"] forKey:@"categoryname"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"date"] forKey:@"date"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"description"] forKey:@"desp"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"start_time"] forKey:@"start_time"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"close_time"] forKey:@"end_time"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
-                        [manageobject setValue:@"1" forKey:@"productid"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"description"] forKey:@"desp"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"name"] forKey:@"productname"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"ratings"] forKey:@"rating"];
-                        [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
-                        [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]]] forKey:@"productimage"];
-                        //     UIImageView *productimgview=[[UIImageView alloc]init];
-                        //    [productimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@""] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                    NSOperationQueue *myQueue22 = [[NSOperationQueue alloc] init];
+                    [myQueue22 addOperationWithBlock:^{
                         
-                        //   NSLog(@"image=%@",productimgview.image);
-                        //   NSData *imgData= UIImagePNGRepresentation(productimgview.image);
-                        //   [manageobject setValue:imgData forKey:@"productimage"];
+                        NSLog(@"delete the particular category data from core data");
+                        NSManagedObjectContext *context3=[appDelegate managedObjectContext];
+                        NSEntityDescription *productEntity=[NSEntityDescription entityForName:@"ProductList" inManagedObjectContext:context3];
+                        NSFetchRequest *fetch=[[NSFetchRequest alloc] init];
+                        [fetch setEntity:productEntity];
+                        NSPredicate *p=[NSPredicate predicateWithFormat:@"categoryId == %@", CategoryId];
+                        [fetch setPredicate:p];
+                        //... add sorts if you want them
+                        NSError *fetchError;
+                        NSError *error;
+                        NSArray *fetchedProducts=[context3 executeFetchRequest:fetch error:&fetchError];
+                        for (NSManagedObject *product in fetchedProducts)
+                        {
+                            [context3 deleteObject:product];
+                        }
+                        [context3 save:&error];
                         
-                        //    UIImageView *userimgview=[[UIImageView alloc]init];
-                        //     [userimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]] placeholderImage:[UIImage imageNamed:@"Profile_image_placeholder"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
-                        //     NSLog(@"image=%@",productimgview.image);
-                        //     NSData *imgData1= UIImagePNGRepresentation(userimgview.image);
-                        //      [manageobject setValue:imgData1 forKey:@"userimage"];
+                        // put url data in core data
+                        for ( NSDictionary *tempDict1 in  [result objectForKey:@"details"])
+                        {
+                            NSLog(@"putting data in core data.");
+                            NSManagedObjectContext *context=[appDelegate managedObjectContext];
+                            NSManagedObject *manageobject=[NSEntityDescription insertNewObjectForEntityForName:@"ProductList" inManagedObjectContext:context];
+                            NSLog(@"cat id=%@",CategoryId);
+                            [manageobject setValue:CategoryId forKey:@"categoryId"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"category_name"] forKey:@"categoryname"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"date"] forKey:@"date"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"description"] forKey:@"desp"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"start_time"] forKey:@"start_time"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"close_time"] forKey:@"end_time"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
+                            [manageobject setValue:@"1" forKey:@"productid"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"description"] forKey:@"desp"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"name"] forKey:@"productname"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"ratings"] forKey:@"rating"];
+                            [manageobject setValue:[tempDict1 valueForKey:@"price"] forKey:@"price"];
+                            [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]]] forKey:@"productimage"];
+                            //     UIImageView *productimgview=[[UIImageView alloc]init];
+                            //    [productimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@""] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                            
+                            //   NSLog(@"image=%@",productimgview.image);
+                            //   NSData *imgData= UIImagePNGRepresentation(productimgview.image);
+                            //   [manageobject setValue:imgData forKey:@"productimage"];
+                            
+                            //    UIImageView *userimgview=[[UIImageView alloc]init];
+                            //     [userimgview sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]] placeholderImage:[UIImage imageNamed:@"Profile_image_placeholder"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
+                            //     NSLog(@"image=%@",productimgview.image);
+                            //     NSData *imgData1= UIImagePNGRepresentation(userimgview.image);
+                            //      [manageobject setValue:imgData1 forKey:@"userimage"];
+                            
+                            [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]]] forKey:@"userimage"];
+                            [appDelegate saveContext];
+                        }
                         
-                        [manageobject setValue:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[tempDict1 valueForKey:@"user_image"]]]] forKey:@"userimage"];
-                        [appDelegate saveContext];
-                    }
-                    
-                    // data show from core data
-                    [ArrProductList removeAllObjects];
-                    NSManagedObjectContext *context5=[appDelegate managedObjectContext];
-                    NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"ProductList"];
-                    NSMutableArray *fetchrequest=[[context5 executeFetchRequest:request error:nil] mutableCopy];
-                    for (NSManagedObject *obj1 in fetchrequest)
-                    {
                         
-                        
-                        if ([[obj1 valueForKey:@"categoryId"] isEqualToString:CategoryId])
+                        // data show from core data
+                        [ArrProductList removeAllObjects];
+                        NSManagedObjectContext *context5=[appDelegate managedObjectContext];
+                        NSFetchRequest *request=[[NSFetchRequest alloc] initWithEntityName:@"ProductList"];
+                        NSMutableArray *fetchrequest=[[context5 executeFetchRequest:request error:nil] mutableCopy];
+                        for (NSManagedObject *obj1 in fetchrequest)
                         {
                             
-                            [ArrProductList addObject:obj1];
-                            lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
+                            
+                            if ([[obj1 valueForKey:@"categoryId"] isEqualToString:CategoryId])
+                            {
+                                
+                                [ArrProductList addObject:obj1];
+                                lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"categoryname"];
+                            }
                         }
-                    }
-                    
-                    [ProductListingTable reloadData];
+                        
+                        [ProductListingTable reloadData];
+                        
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        }];
+                    }];
                     
                     
                    
@@ -297,11 +321,15 @@
      //           [[NSOperationQueue mainQueue] addOperationWithBlock:^{
     //            }];
     //        }];
-                
+               
             }
+          
+            
         }];
             
             
+           
+        
 
             }
     else
@@ -329,7 +357,9 @@
                 }
                 lblCategoryName.text=[[ArrProductList objectAtIndex:0] valueForKey:@"category_name"];
                 
+                
                 [ProductListingTable reloadData];
+                
                 
                 //put data from url to core data in back ground thread
                 NSOperationQueue *myQueue11 = [[NSOperationQueue alloc] init];
@@ -388,6 +418,34 @@
         }];
     }
     
+}
+-(void)checkLoader
+{
+    
+    if([self.view.subviews containsObject:loader_shadow_View])
+    {
+        
+        [loader_shadow_View removeFromSuperview];
+        [self.view setUserInteractionEnabled:YES];
+    }
+    else
+    {
+       loader_shadow_View = [[UIView alloc] initWithFrame:self.view.frame];
+     //   loader_shadow_View = [[UIView alloc] initWithFrame:ProductListingTable.frame];
+        [loader_shadow_View setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.56f]];
+        [loader_shadow_View setUserInteractionEnabled:NO];
+        [[loader_shadow_View layer] setZPosition:2];
+        [self.view setUserInteractionEnabled:NO];
+        UIActivityIndicatorView *loader =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        
+        [loader setCenter:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2)];
+        
+        [loader startAnimating];
+        
+        
+        [loader_shadow_View addSubview:loader];
+        [self.view addSubview:loader_shadow_View];
+    }
 }
 -(void)pushmethod:(UIButton *)sender
 {
@@ -595,7 +653,7 @@
         NSData *dataBytes = [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"productimage"];
         cell.ProductImage.image=[UIImage imageWithData:dataBytes];
         
-        cell.ProductImage.contentMode=UIViewContentModeScaleAspectFill;
+        cell.ProductImage.contentMode=UIViewContentModeScaleAspectFit;
         cell.ProductImage.clipsToBounds = YES;
 
         
@@ -643,6 +701,8 @@
      //   Profile_image_placeholder
       //  [cell.UserImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"user_image"]]] placeholderImage:[UIImage imageNamed:@"Profile_image_placeholder"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
         
+        
+        /*
         cell.lblDate.text=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"date"];
         if ([[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"start_time"] isEqualToString:@""])
         {
@@ -664,6 +724,7 @@
             cell.lblEndTime.hidden=NO;
             cell.lblEndTime.text=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"end_time"];
         }
+         */
         cell.lblDate.text=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"date"];
     }
     else
@@ -672,8 +733,8 @@
     cell.lblProductDesc.text=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"description"];
    
    [cell.ProductImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@"PlaceholderImg"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
-    cell.ProductImage.contentMode=UIViewContentModeScaleAspectFill;
-         cell.ProductImage.clipsToBounds = YES;
+    cell.ProductImage.contentMode=UIViewContentModeScaleAspectFit;
+     //    cell.ProductImage.clipsToBounds = YES;
     
     //product cost
     NSString *priceSign;
