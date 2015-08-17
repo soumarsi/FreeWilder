@@ -5,7 +5,12 @@
 #import "Footer.h"
 #import "Side_menu.h"
 #import "UIImageView+WebCache.h"
-@interface ProductViewController ()<footerdelegate,Slide_menu_delegate>
+#import "ProductDetailsViewController.h"
+@interface ProductViewController ()<footerdelegate,Slide_menu_delegate>{
+    
+    NSString *priceSign;
+    
+}
 
 @end
 
@@ -617,11 +622,54 @@
 {
     
     
-    ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Product_details"];
+//    ProductViewController *obj=[self.storyboard instantiateViewControllerWithIdentifier:@"Product_details"];
+//    
+//    [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
     
-    [self PushViewController:obj WithAnimation:kCAMediaTimingFunctionEaseIn];
+    //-----------PK----------//
     
-   }
+    
+    ProductDetailsViewController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"Product_details"];
+    
+    if (data) {
+        
+        nav.boolString = @"coreData";
+        
+        NSString *price=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"price"];
+        NSInteger len=price.length;
+        NSString *finalPrice = [priceSign stringByAppendingString:[[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"price"] substringWithRange:NSMakeRange(4, len-4)]];
+        
+        
+        nav.detailsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"productname"], @"productname",
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"desp"], @"desp",
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"productimage"], @"productimage",
+                           finalPrice, @"price",
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"userimage"], @"userimage",
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"date"], @"date",nil];
+        
+        NSLog(@"PRO IMAGEEEEEEe-=-=-=-IF=-=-=-=-=-=-=-> %@",[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"userimage"]);
+        
+    }else{
+        
+        NSString *price=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"price"];
+        NSInteger len=price.length;
+        NSString *finalPrice = [priceSign stringByAppendingString:[[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"price"] substringWithRange:NSMakeRange(4, len-4)]];
+        
+        nav.detailsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"name"], @"productname",
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"description"], @"desp",
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"product_image"], @"productimage",
+                           finalPrice, @"price",
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"user_image"], @"userimage",
+                           [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"date"], @"date",nil];
+        
+        NSLog(@"PRO IMAGEEEEEEe-=-=-=-ESLE=-=-=-=-=-=-=-> %@",[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"user_image"]);
+        
+    }
+    [self.navigationController pushViewController:nav animated:NO];
+    
+}
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -645,6 +693,7 @@
     Productcell *cell=(Productcell *)[tableView dequeueReusableCellWithIdentifier:@"productcell"];
     if (data)
     {
+        
         //showing data from core data
         cell.lblProductName.text=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"productname"];
         cell.lblProductDesc.text=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"desp"];
@@ -653,12 +702,12 @@
         NSData *dataBytes = [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"productimage"];
         cell.ProductImage.image=[UIImage imageWithData:dataBytes];
         
-        cell.ProductImage.contentMode=UIViewContentModeScaleAspectFit;
+//        cell.ProductImage.contentMode=UIViewContentModeScaleAspectFill;
         cell.ProductImage.clipsToBounds = YES;
 
         
         //product cost
-        NSString *priceSign;
+        
         if ([[[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"price"] substringToIndex:3] isEqualToString:@"EUR"])
         {
             priceSign=@"€";
@@ -684,12 +733,13 @@
         cell.lblProductCost.text=[priceSign stringByAppendingString:[[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"price"] substringWithRange:NSMakeRange(4, len-4)]];
         
         //user image
-        cell.UserImage.layer.cornerRadius = cell.UserImage.frame.size.height/2;
+        cell.UserImage.layer.cornerRadius = cell.UserImage.frame.size.width/2;
         cell.UserImage.clipsToBounds = YES;
         cell.UserImage.userInteractionEnabled=YES;
         cell.UserImage.layer.borderColor=[UIColor whiteColor].CGColor;
         cell.UserImage.layer.borderWidth=1.5;
         cell.UserImage.contentMode=UIViewContentModeScaleAspectFill;
+        
         NSData *dataBytes1 = [[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"userimage"];
         cell.UserImage.image=[UIImage imageWithData:dataBytes1];
         if (cell.UserImage.image==nil)
@@ -697,6 +747,7 @@
           //   NSLog(@"data byte=%@",cell.UserImage.image);
             cell.UserImage.image=[UIImage imageNamed:@"Profile_image_placeholder"];
         }
+        
        
      //   Profile_image_placeholder
       //  [cell.UserImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"user_image"]]] placeholderImage:[UIImage imageNamed:@"Profile_image_placeholder"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
@@ -733,11 +784,11 @@
     cell.lblProductDesc.text=[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"description"];
    
    [cell.ProductImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"product_image"]]] placeholderImage:[UIImage imageNamed:@"PlaceholderImg"] options:/* DISABLES CODE */ (0) == 0?SDWebImageRefreshCached : 0];
-    cell.ProductImage.contentMode=UIViewContentModeScaleAspectFit;
+//    cell.ProductImage.contentMode=UIViewContentModeScaleAspectFill;
      //    cell.ProductImage.clipsToBounds = YES;
     
     //product cost
-    NSString *priceSign;
+    
     if ([[[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"price"] substringToIndex:3] isEqualToString:@"EUR"])
     {
         priceSign=@"€";
@@ -763,7 +814,7 @@
     cell.lblProductCost.text=[priceSign stringByAppendingString:[[[ArrProductList objectAtIndex:indexPath.row] valueForKey:@"price"] substringWithRange:NSMakeRange(4, len-4)]];
     
     //user image
-    cell.UserImage.layer.cornerRadius = cell.UserImage.frame.size.height/2;
+    cell.UserImage.layer.cornerRadius = cell.UserImage.frame.size.width/2;
     cell.UserImage.clipsToBounds = YES;
     cell.UserImage.userInteractionEnabled=YES;
     cell.UserImage.layer.borderColor=[UIColor whiteColor].CGColor;

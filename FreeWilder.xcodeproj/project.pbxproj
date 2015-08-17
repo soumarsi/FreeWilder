@@ -46,6 +46,8 @@
 		A5561B151B1C713700182D42 /* Productcell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5561B131B1C713700182D42 /* Productcell.m */; };
 		A5561B181B1C714E00182D42 /* ProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5561B161B1C714E00182D42 /* ProductViewController.m */; };
 		A5561B1B1B1C893800182D42 /* ProductDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5561B1A1B1C893800182D42 /* ProductDetailsViewController.m */; };
+		BED076301B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BED0762E1B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.m */; };
+		BED076311B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BED0762F1B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.xib */; };
 		F900F0AB1B1C350900C35751 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F900F0AA1B1C350900C35751 /* EditProfileViewController.m */; };
 		F900F0AE1B1C3F9200C35751 /* FindInterestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F900F0AD1B1C3F9200C35751 /* FindInterestsViewController.m */; };
 		F900F0B11B1C542F00C35751 /* AddServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F900F0B01B1C542F00C35751 /* AddServiceViewController.m */; };
@@ -156,6 +158,9 @@
 		A5561B171B1C714E00182D42 /* ProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductViewController.h; sourceTree = "<group>"; };
 		A5561B191B1C893800182D42 /* ProductDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailsViewController.h; sourceTree = "<group>"; };
 		A5561B1A1B1C893800182D42 /* ProductDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailsViewController.m; sourceTree = "<group>"; };
+		BED0762D1B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailsCollectionViewCell.h; sourceTree = "<group>"; };
+		BED0762E1B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailsCollectionViewCell.m; sourceTree = "<group>"; };
+		BED0762F1B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetailsCollectionViewCell.xib; sourceTree = "<group>"; };
 		F900F0A91B1C350900C35751 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		F900F0AA1B1C350900C35751 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		F900F0AC1B1C3F9200C35751 /* FindInterestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindInterestsViewController.h; sourceTree = "<group>"; };
@@ -411,6 +416,9 @@
 				5B8DB4161B53CF3000217498 /* WishlistViewController.m */,
 				5B7E66311B54CE3100D760EC /* SearchProductViewController.h */,
 				5B7E66321B54CE3100D760EC /* SearchProductViewController.m */,
+				BED0762D1B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.h */,
+				BED0762E1B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.m */,
+				BED0762F1B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -497,7 +505,7 @@
 					};
 					F98741981B157B7200CDAD0F = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = HVFEBCENV9;
+						DevelopmentTeam = WXGENKJWK5;
 						TestTargetID = F987417C1B157B7200CDAD0F;
 					};
 				};
@@ -529,6 +537,7 @@
 				F9F327F11B15DFB7007CB53F /* Side_menu.xib in Resources */,
 				F987418F1B157B7200CDAD0F /* Main.storyboard in Resources */,
 				F98741AF1B157DFE00CDAD0F /* Lato-Hairline.ttf in Resources */,
+				BED076311B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.xib in Resources */,
 				F98741941B157B7200CDAD0F /* LaunchScreen.xib in Resources */,
 				F98741B01B157DFE00CDAD0F /* Lato-Light.ttf in Resources */,
 				F98741B11B157DFE00CDAD0F /* Lato-Regular.ttf in Resources */,
@@ -588,6 +597,7 @@
 				84B35B481B20292B00F5B6FE /* SearchCategoryViewController.m in Sources */,
 				5BA7B3401B4A5ECD00B5D342 /* SDWebImageDownloader.m in Sources */,
 				5BA7B3441B4A5ECD00B5D342 /* UIButton+WebCache.m in Sources */,
+				BED076301B7C81E500DF9AEF /* ProductDetailsCollectionViewCell.m in Sources */,
 				84B35B441B20292B00F5B6FE /* FW_InviteFriendViewController.m in Sources */,
 				5BA7B33C1B4A5ECD00B5D342 /* NSData+ImageContentType.m in Sources */,
 				156DFDDE1B43BECA00D3F784 /* ForgotpasswordViewController.m in Sources */,
@@ -735,7 +745,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3bf4da9-ecca-4c87-b755-1b4a48efc98e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -753,7 +763,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3bf4da9-ecca-4c87-b755-1b4a48efc98e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -761,8 +771,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -774,7 +784,7 @@
 				INFOPLIST_FILE = FreeWilderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3bf4da9-ecca-4c87-b755-1b4a48efc98e";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeWilder.app/FreeWilder";
 			};
 			name = Debug;
@@ -783,8 +793,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LCF, INC (WXGENKJWK5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -792,7 +802,7 @@
 				INFOPLIST_FILE = FreeWilderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3bf4da9-ecca-4c87-b755-1b4a48efc98e";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeWilder.app/FreeWilder";
 			};
 			name = Release;

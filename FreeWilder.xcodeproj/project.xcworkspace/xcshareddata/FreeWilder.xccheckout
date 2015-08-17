@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>A111CA6D-14D2-46C3-9DF7-4D9FC4BE8DEE</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>FreeWilder</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>EE4FAAB11ECCB85780D559B8D9C73409F6390FA0</key>
 		<string>https://github.com/soumarsi/FreeWilder.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FreeWilder.xcodeproj/project.xcworkspace</string>
+	<string>FreeWilder.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>EE4FAAB11ECCB85780D559B8D9C73409F6390FA0</key>
